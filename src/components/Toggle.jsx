@@ -58,7 +58,7 @@ const StyledToggle = styled.label`
   }
 `;
 
-export const Toggle = ({ active, onChange }) => {
+export const Toggle = ({ onChange }) => {
   return (
     <ToggleWrap onClick={() => document.getElementById('toggleTheme').click()}>
       <StyledToggle>

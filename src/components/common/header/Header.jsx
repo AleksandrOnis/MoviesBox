@@ -7,6 +7,8 @@ import bgImgM from 'images/header-bg/bgimg@2x.jpg';
 import { Navigation } from './Navigation';
 import { Toggle } from 'components/Toggle';
 import { useState, useEffect } from 'react';
+import { useContext } from 'react';
+import { ThemeContext } from 'components/common/context';
 
 const StyledHeader = styled.header`
   display: flex;
@@ -33,41 +35,27 @@ const StyledHeader = styled.header`
 `;
 
 export const Header = () => {
-  const [toggle, setToggle] = useState(true);
+  const { theme, setTheme } = useContext(ThemeContext);
 
   useEffect(() => {
-    const toggleThemeInLS = localStorage.getItem('toggleTheme');
-    if (toggleThemeInLS !== null)
-      if (!JSON.parse(toggleThemeInLS)) {
+    const ThemeInLS = localStorage.getItem('theme');
+    if (ThemeInLS !== null)
+      if (!JSON.parse(ThemeInLS)) {
         const refCheckBoxTheme = document.getElementById('toggleTheme');
         refCheckBoxTheme.click();
-        setToggle(false);
+        setTheme(false);
       }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('toggleTheme', toggle);
-  }, [toggle]);
-
-  // const saveToLS = () => {
-  //   if (refCheckBox.checked) {
-  //     refCheckBox.click();
-  //     setToggle(true);
-  //   }
-  // };
-
-  // const loadFromLS = () => {
-  //   if (refCheckBox.checked) {
-  //     refCheckBox.click();
-  //     setToggle(true);
-  //   }
-  // };
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   return (
     <StyledHeader>
       <Logo title="Filmoteka" />
       <Navigation />
-      <Toggle active={toggle} onChange={() => setToggle(!toggle)} />
+      <Toggle active={theme} onChange={() => setTheme(!theme)} />
     </StyledHeader>
   );
 };
