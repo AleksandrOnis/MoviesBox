@@ -1,0 +1,78 @@
+import styled from 'styled-components';
+import { WiDaySunny } from 'react-icons/wi';
+import { WiMoonWaningCrescent4 } from 'react-icons/wi';
+
+const IconSun = styled(WiDaySunny)`
+  position: absolute;
+  top: 25%;
+  left: 9%;
+  color: yellow;
+`;
+
+const IconMoon = styled(WiMoonWaningCrescent4)`
+  position: absolute;
+  top: 25%;
+  right: 4%;
+  color: lightgray;
+`;
+
+const ToggleWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  padding: 10px;
+  height: 50px;
+  cursor: pointer;
+`;
+
+const StyledToggle = styled.label`
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+  border: 1px solid Gray;
+  border-radius: 20px;
+  pointer-events: none;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider:after {
+    position: absolute;
+    content: '';
+    height: 31px;
+    width: 31px;
+    left: 29px;
+    background-color: #ff6b01;
+    border-radius: 50%;
+    transition: 0.1s;
+    top: -1px;
+  }
+
+  input:checked + .slider:after {
+    transform: translateX(-31px);
+    background-color: #ff6b01;
+  }
+`;
+
+export const Toggle = ({ active, onChange }) => {
+  return (
+    <ToggleWrap onClick={() => document.getElementById('toggleTheme').click()}>
+      <StyledToggle>
+        <input
+          id="toggleTheme"
+          type="checkbox"
+          onChange={e => {
+            onChange();
+          }}
+        />
+        <span className="slider" />
+        <IconSun />
+        <IconMoon />
+      </StyledToggle>
+    </ToggleWrap>
+  );
+};

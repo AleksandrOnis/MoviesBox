@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import bg from 'images/main-bg/light.jpg';
 
 const GlobalStyled = createGlobalStyle`
   *, *::after, *::before{
@@ -7,21 +6,29 @@ const GlobalStyled = createGlobalStyle`
   }
 
   body {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh; */
     font-family: "Roboto", sans-serif;
-    background-image: url(${bg});
+    background-color: #1f1010;
   }
-    
+
   #root{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    flex-grow: 1;
+    
   }
+
 `;
 
 export const GlobalStyle = () => {
   return <GlobalStyled />;
+};
+
+export const darkTheme = {
+  body: '#000',
+  textColor: '#fff',
+};
+
+export const lightTheme = {
+  body: '#fff',
+  textColor: '#000',
 };
