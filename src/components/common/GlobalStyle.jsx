@@ -13,6 +13,16 @@ const GlobalStyled = createGlobalStyle`
     /* background-color: #1f1010; */
   }
 
+  a { 
+    color: #ffffff; 
+    text-decoration: none;
+    :hover { 
+      color: #ff6b01; 
+    }
+  }
+
+/* nav a { color:green; } */
+
   #root{
     
   }

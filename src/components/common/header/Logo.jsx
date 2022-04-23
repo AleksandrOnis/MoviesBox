@@ -1,6 +1,8 @@
 import styled, { keyframes } from 'styled-components';
 import logo from 'images/icons/logo.svg';
 import { Wrap } from '../Wrap';
+// import { NavLink } from 'react-router-dom';
+import { StyledNavLink } from '../StyledNavLink';
 
 const rotateAnimation = keyframes`
   0% {
@@ -43,7 +45,9 @@ export const Logo = ({ title }) => {
   return (
     <Wrap fd="row" g="10px">
       <StyledLogo src={logo} />
-      <Title>{title}</Title>
+      <StyledNavLink to="/main">
+        <Title>{title}</Title>
+      </StyledNavLink>
     </Wrap>
   );
 };
