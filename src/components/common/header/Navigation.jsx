@@ -3,11 +3,16 @@ import { StyledNavLink } from '../StyledNavLink';
 
 const NavList = styled.ul``;
 
+const StyledNav = styled(StyledNavLink)`
+  :not(:last-child) {
+    margin-right: 40px;
+  }
+`;
+
 export const Navigation = () => {
   return (
     <NavList>
-      <StyledNavLink to="/main">Main</StyledNavLink>;
-      <StyledNavLink to="/library">Library</StyledNavLink>;
+      <StyledNav to="/main">Main</StyledNav>;<StyledNav to="/library">Library</StyledNav>;
     </NavList>
   );
 };
