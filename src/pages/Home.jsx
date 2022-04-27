@@ -14,9 +14,7 @@ export const Home = props => {
   return (
     <>
       <Header />
-      <StyledMain id="main">
-        <Loader />
-      </StyledMain>
+      <StyledMain id="main">{/* <Loader /> */}</StyledMain>
       <Footer />
     </>
   );
