@@ -9,7 +9,6 @@ import { ThemeProvider } from 'styled-components';
 import { ThemeContext } from 'context';
 import { useState } from 'react';
 import { darkTheme, lightTheme } from 'utils/theme';
-import { Header } from 'components/common/header/Header';
 
 function App() {
   const [theme, setTheme] = useState(true);

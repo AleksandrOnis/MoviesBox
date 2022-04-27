@@ -3,6 +3,10 @@ import { Wrap } from './Wrap';
 import { color } from 'utils/theme';
 
 const StyledFooter = styled.footer`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   padding: 20px;
   font-size: 12px;
   line-height: 14px;
@@ -12,6 +16,10 @@ const StyledFooter = styled.footer`
 `;
 
 const FooterWrap = styled(Wrap)``;
+
+const AccentWrap = styled.span`
+  color: ${color.accent};
+`;
 
 const Text = styled.p`
   padding: 0 10px;
@@ -24,9 +32,15 @@ export const Footer = () => {
   return (
     <StyledFooter>
       <FooterWrap fd="row" jc="center">
-        <Text>&copy; 2021</Text>
+        <Text>
+          <AccentWrap>&copy;</AccentWrap> 2021
+        </Text>
         <Text>All Rights Reserved</Text>
-        <Text>Developed by Oleksandr Onyshchenko</Text>
+        <Text>
+          Developed
+          <AccentWrap> by </AccentWrap>
+          Oleksandr Onyshchenko
+        </Text>
       </FooterWrap>
     </StyledFooter>
   );

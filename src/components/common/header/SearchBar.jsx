@@ -81,7 +81,7 @@ export const SearchBar = () => {
           required
         />
       </Label>
-      <Button type="submit" class="header-form__btn">
+      <Button type="submit">
         <SearchIcon color={color.accent} />
       </Button>
     </Form>

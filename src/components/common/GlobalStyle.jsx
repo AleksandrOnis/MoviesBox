@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import { color } from 'utils/theme';
 
 const GlobalStyled = createGlobalStyle`
   *, *::after, *::before{
@@ -9,9 +8,10 @@ const GlobalStyled = createGlobalStyle`
   body {
     /* display: flex;
     flex-direction: column;
-    min-height: 100vh; */
+    min-height: 100vh;  */
     font-family: "Roboto", sans-serif;
-    /* background-color: #1f1010; */
+    background: ${(props = '#444') => props.theme.body};
+    color: ${(props = '#fff') => props.theme.textColor};
   }
 
   a { 
