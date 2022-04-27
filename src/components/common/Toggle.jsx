@@ -31,7 +31,7 @@ const StyledToggle = styled.label`
   display: inline-block;
   width: 60px;
   height: 30px;
-  border: 1px solid Gray;
+  border: 1px solid ${color.accent};
   border-radius: 20px;
   pointer-events: none;
 

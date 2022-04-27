@@ -6,12 +6,12 @@ const GlobalStyled = createGlobalStyle`
   }
 
   body {
-    /* display: flex;
+    display: flex;
     flex-direction: column;
-    min-height: 100vh;  */
+    min-height: 100vh; 
     font-family: "Roboto", sans-serif;
-    background: ${(props = '#444') => props.theme.body};
-    color: ${(props = '#fff') => props.theme.textColor};
+    /* background: ${(props = '#444') => props.theme.body};
+    color: ${(props = '#fff') => props.theme.textColor}; */
   }
 
   a { 
@@ -22,7 +22,9 @@ const GlobalStyled = createGlobalStyle`
 /* nav a { color:green; } */
 
   #root{
-    
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
   }
 
 `;

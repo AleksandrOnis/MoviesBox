@@ -3,11 +3,11 @@ import { Header } from 'components/common/header/Header';
 import { Loader } from 'components/common/Loader';
 import { Footer } from 'components/common/Footer';
 
-const StyledMain = styled.main`
-  /* min-height: 100vh; */
+const StyledMain = styled.div`
+  flex-grow: 1;
   /* background-image: url(${props => props.theme.body}); */
-  /* background: ${props => props.theme.body};
-  color: ${props => props.theme.textColor}; */
+  background: ${props => props.theme.body};
+  color: ${props => props.theme.textColor};
 `;
 
 export const Home = props => {
