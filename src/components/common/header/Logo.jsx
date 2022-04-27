@@ -3,6 +3,8 @@ import logo from 'images/icons/logo.svg';
 import { Wrap } from '../Wrap';
 // import { NavLink } from 'react-router-dom';
 import { StyledNavLink } from '../StyledNavLink';
+import { color } from 'utils/theme';
+import { deviceScreen } from 'utils/theme';
 
 const rotateAnimation = keyframes`
   0% {
@@ -14,9 +16,8 @@ const rotateAnimation = keyframes`
 `;
 
 const StyledLogo = styled.img`
-  animation: ${rotateAnimation} 1s infinite linear;
-  max-width: 30px;
-  height: 30px;
+  animation: ${rotateAnimation} 10s infinite linear;
+
   :hover {
     animation-play-state: paused;
   }
@@ -26,9 +27,8 @@ const Title = styled.h1`
   display: none;
   margin: 0;
   padding: 0;
-  max-height: 30px;
 
-  @media screen and (min-width: 768px) {
+  ${deviceScreen.T} {
     display: block;
     font-size: 30px;
     line-height: 35px;
@@ -36,7 +36,7 @@ const Title = styled.h1`
     color: #ffffff;
 
     :hover {
-      color: #ff6b01;
+      color: ${color.accent};
     }
   }
 `;

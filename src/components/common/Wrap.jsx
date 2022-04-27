@@ -4,12 +4,12 @@ const StyledWrap = styled.div`
   display: flex;
   flex-direction: ${({ fd = 'column' }) => fd};
   justify-content: ${({ jc = 'left' }) => jc};
-  text-align: ${({ ta = 'center' }) => ta};
+  align-items: ${({ ai = 'center' }) => ai};
   margin: ${({ m = 0 }) => m};
   padding: ${({ p = 0 }) => p};
-  max-width: ${({ mw }) => mw};
-  width: ${({ w }) => w};
-  height: ${({ h }) => h};
+  max-width: ${({ mw = 'auto' }) => mw};
+  width: ${({ w = 'auto' }) => w};
+  height: ${({ h = 'auto' }) => h};
   gap: ${({ g = 0 }) => g};
 `;
 

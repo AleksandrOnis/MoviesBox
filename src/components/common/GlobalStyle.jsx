@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { color } from 'utils/theme';
 
 const GlobalStyled = createGlobalStyle`
   *, *::after, *::before{
@@ -16,9 +17,6 @@ const GlobalStyled = createGlobalStyle`
   a { 
     color: #ffffff; 
     text-decoration: none;
-    :hover { 
-      color: #ff6b01; 
-    }
   }
 
 /* nav a { color:green; } */

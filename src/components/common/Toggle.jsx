@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { WiDaySunny } from 'react-icons/wi';
 import { WiMoonWaningCrescent4 } from 'react-icons/wi';
+import { color } from 'utils/theme';
 
 const IconSun = styled(WiDaySunny)`
   position: absolute;
@@ -46,7 +47,7 @@ const StyledToggle = styled.label`
     height: 31px;
     width: 31px;
     left: 29px;
-    background-color: #ff6b01;
+    background-color: ${color.accent};
     border-radius: 50%;
     transition: 0.1s;
     top: -1px;
@@ -54,7 +55,7 @@ const StyledToggle = styled.label`
 
   input:checked + .slider:after {
     transform: translateX(-31px);
-    background-color: #ff6b01;
+    background-color: ${color.accent};
   }
 `;
 
