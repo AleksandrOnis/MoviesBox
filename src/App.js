@@ -7,7 +7,7 @@ import { ThemeProvider } from 'styled-components';
 import { ThemeContext } from 'context';
 import { lazy, Suspense, useState } from 'react';
 import { darkTheme, lightTheme } from 'utils/theme';
-import Loader from 'react-spinners/BarLoader';
+import { Loader } from 'components/common/Loader';
 
 const HomePage = lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
 const LibraryPage = lazy(() =>
@@ -21,7 +21,7 @@ function App() {
     <ThemeProvider theme={theme ? darkTheme : lightTheme}>
       <ThemeContext.Provider value={{ theme, setTheme }}>
         <GlobalStyle />
-        <Suspense fallback={Loader}>
+        <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="home" element={<HomePage />} />
             <Route path="library" element={<LibraryPage />} />

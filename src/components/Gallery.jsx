@@ -37,7 +37,9 @@ export const Gallery = () => {
     <SectionGallery>
       Movies
       <MoviesList>
-        <MovieCard movies={movies} />
+        {movies.map(movie => {
+          return <MovieCard key={movie.id} movie={movie} />;
+        })}
       </MoviesList>
     </SectionGallery>
   ) : (
