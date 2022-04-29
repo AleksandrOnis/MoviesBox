@@ -25,7 +25,7 @@ function App() {
           <Routes>
             <Route path="home" element={<HomePage />} />
             <Route path="library" element={<LibraryPage />} />
-            <Route path="*" element={<Navigate to="/home" />} />
+            <Route path="*" element={<Navigate to="/home" replace />} />
           </Routes>
         </Suspense>
         <Notify />

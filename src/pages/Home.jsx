@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Header } from 'components/common/header/Header';
 import { Loader } from 'components/common/Loader';
 import { Footer } from 'components/common/Footer';
+import { Gallery } from 'components/Gallery';
 
 const StyledMain = styled.div`
   flex-grow: 1;
@@ -10,11 +11,14 @@ const StyledMain = styled.div`
   color: ${props => props.theme.textColor};
 `;
 
+const isLoading = false;
+// const isLoading = true;
+
 export const Home = props => {
   return (
     <>
       <Header />
-      <StyledMain id="main">{/* <Loader /> */}</StyledMain>
+      <StyledMain id="main">{isLoading ? <Loader /> : <Gallery />}</StyledMain>
       <Footer />
     </>
   );
