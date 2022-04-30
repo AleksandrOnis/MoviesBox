@@ -20,6 +20,7 @@ export const color = {
 };
 
 export const deviceScreen = {
+  M: '@media screen and (max-width: 767.9px)',
   T: '@media screen and (min-width: 768px)',
   D: '@media screen and (min-width: 1024px)',
 };

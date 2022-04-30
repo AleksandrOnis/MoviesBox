@@ -16,7 +16,7 @@ const LibraryPage = lazy(() =>
 
 function App() {
   const [theme, setTheme] = useState(true);
-  const [searchFilm, setSearchFilm] = useState('');
+
   return (
     <ThemeProvider theme={theme ? darkTheme : lightTheme}>
       <ThemeContext.Provider value={{ theme, setTheme }}>

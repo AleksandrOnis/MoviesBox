@@ -14,6 +14,10 @@ const GlobalStyled = createGlobalStyle`
     color: ${(props = '#fff') => props.theme.textColor}; */
   }
 
+  li {
+    list-style-type: none;
+  }
+
   a { 
     color: #ffffff; 
     text-decoration: none;

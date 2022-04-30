@@ -30,9 +30,6 @@ const Card = styled.li`
     box-shadow: 8px 8px 10px rgba(37, 37, 37, 0.6);
   }
 `;
-const LinkA = styled.a`
-  pointer-events: none;
-`;
 const Thumb = styled.div`
   /* background-color: #a5a5a5; */
   /* background: url(${noPoster} cover no-repeat); */
@@ -83,7 +80,7 @@ const Vote = styled.span`
   background-color: #ff6b01;
 `;
 
-export const MovieCard = ({ movie }) => {
+export const MovieCard = ({ movie, setModalIsOpen }) => {
   const {
     title = '',
     genres = '',
@@ -93,7 +90,7 @@ export const MovieCard = ({ movie }) => {
   } = movie;
 
   return (
-    <Card>
+    <Card onClick={() => setModalIsOpen(true)}>
       <Thumb>
         {poster_path ? (
           <Image
