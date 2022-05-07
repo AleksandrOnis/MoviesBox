@@ -1,3 +1,4 @@
+import 'normalize.css';
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyled = createGlobalStyle`
@@ -6,6 +7,7 @@ const GlobalStyled = createGlobalStyle`
   }
 
   body {
+    margin: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh; 
@@ -21,6 +23,10 @@ const GlobalStyled = createGlobalStyle`
   a { 
     color: #ffffff; 
     text-decoration: none;
+  }
+
+  h1,h2,h3,h4,h5,h6,p {
+    margin: 0;
   }
 
 /* nav a { color:green; } */
