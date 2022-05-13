@@ -1,15 +1,9 @@
 import styled from 'styled-components';
-import { Header } from 'components/common/header/Header';
-import { Loader } from 'components/common/Loader';
-import { Footer } from 'components/common/Footer';
-import { Gallery } from 'components/Gallery';
-
-const StyledMain = styled.div`
-  flex-grow: 1;
-  /* background-image: url(${props => props.theme.body}); */
-  background: ${props => props.theme.body};
-  color: ${props => props.theme.textColor};
-`;
+import { Loader, Main, Wrap } from 'components/common';
+import { Header } from 'components/header/Header';
+import { Dashboard } from 'components/dashboard/Dashboard';
+import { Footer } from 'components/footer/Footer';
+import { Gallery } from 'components/gallery/Gallery';
 
 const isLoading = false;
 // const isLoading = true;
@@ -17,8 +11,12 @@ const isLoading = false;
 export const Home = props => {
   return (
     <>
-      <Header />
-      <StyledMain id="main">{isLoading ? <Loader /> : <Gallery />}</StyledMain>
+      <Header>
+        <Wrap jc="space-between" ai="center">
+          <Dashboard />
+        </Wrap>
+      </Header>
+      <Main id="main">{isLoading ? <Loader /> : <Gallery />}</Main>
       <Footer />
     </>
   );

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const StyledWrap = styled.div`
   display: flex;
-  flex-direction: ${({ fd = 'column' }) => fd};
+  flex-direction: ${({ fd = 'row' }) => fd};
   justify-content: ${({ jc = 'left' }) => jc};
   align-items: ${({ ai = 'center' }) => ai};
   margin: ${({ m = 0 }) => m};

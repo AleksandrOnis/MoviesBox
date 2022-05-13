@@ -1,13 +1,8 @@
 import styled from 'styled-components';
-import { Wrap } from './Wrap';
+import { Wrap } from 'components/common/Wrap';
 import { color } from 'utils/theme';
 
 const StyledFooter = styled.footer`
-  /* position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0; */
-  /* flex-grow: 1; */
   padding: 20px;
   font-size: 12px;
   line-height: 14px;

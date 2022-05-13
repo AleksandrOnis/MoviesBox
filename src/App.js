@@ -1,12 +1,11 @@
 import 'react-toastify/dist/ReactToastify.css';
 import { Notify } from 'components/common/Notify';
-import { GlobalStyle } from 'components/common/GlobalStyle';
+import { GlobalStyle, Loader } from 'components/common';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { ThemeContext } from 'context';
 import { lazy, Suspense, useState } from 'react';
 import { darkTheme, lightTheme } from 'utils/theme';
-import { Loader } from 'components/common/Loader';
 
 const HomePage = lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
 const LibraryPage = lazy(() =>

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { WiDaySunny } from 'react-icons/wi';
-import { WiMoonWaningCrescent4 } from 'react-icons/wi';
+import { WiDaySunny, WiMoonWaningCrescent4 } from 'react-icons/wi';
 import { color } from 'utils/theme';
 
 const IconSun = styled(WiDaySunny)`

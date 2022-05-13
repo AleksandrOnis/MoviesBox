@@ -2,10 +2,9 @@ import styled from 'styled-components';
 import { moviesAPI } from 'api';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
-import { Loader } from 'components/common/Loader';
+import { Loader, Modal } from 'components/common';
 import { MovieCard } from './MovieCard';
 import { deviceScreen } from 'utils/theme';
-import { Modal } from './common/Modal';
 
 const SectionGallery = styled.section``;
 const MoviesList = styled.ul`

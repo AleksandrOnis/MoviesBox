@@ -1,8 +1,8 @@
 import styled, { keyframes } from 'styled-components';
 import logo from 'images/icons/logo.svg';
-import { Wrap } from '../Wrap';
+import { Wrap } from '../../common/Wrap';
 // import { NavLink } from 'react-router-dom';
-import { StyledNavLink } from '../StyledNavLink';
+import { StyledNavLink } from '../../common/StyledNavLink';
 import { color } from 'utils/theme';
 import { deviceScreen } from 'utils/theme';
 

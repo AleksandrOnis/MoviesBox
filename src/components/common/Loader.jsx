@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { color } from 'utils/theme';
 
 const LoaderThumb = styled.div`
   position: absolute;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { StyledNavLink } from '../StyledNavLink';
+import { StyledNavLink } from '../../common/StyledNavLink';
 import { NavLink } from 'react-router-dom';
 import { color } from 'utils/theme';
 

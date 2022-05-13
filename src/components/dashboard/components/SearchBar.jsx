@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { color } from 'utils/theme';
-import { useContext } from 'react';
-import { Context } from 'context';
 
 const Form = styled.form`
   display: flex;
