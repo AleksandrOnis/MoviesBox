@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { Header } from 'components/header/Header';
-import { Dashboard } from 'components/dashboard/Dashboard';
-import { Wrap } from 'components/common';
-import { Footer } from 'components/footer/Footer';
-import { Main } from 'components/common';
+import { Header } from 'modules/header/Header';
+import { Dashboard } from 'modules/dashboard/Dashboard';
+import { Wrap } from 'modules/common';
+import { Footer } from 'modules/footer/Footer';
+import { Main } from 'modules/common';
 
 const StyledLibrary = styled.main`
   min-height: 100vh;
@@ -13,12 +13,12 @@ const StyledLibrary = styled.main`
 export const Library = () => {
   return (
     <>
-      <Header />
-      <Main>
-        <Wrap jc="space-between" ai="center" p="10px 40px 10px 40px">
+      <Header>
+        <Wrap jc="space-between" ai="center">
           <Dashboard />
         </Wrap>
-      </Main>
+      </Header>
+      <Main></Main>
       <Footer />
     </>
   );

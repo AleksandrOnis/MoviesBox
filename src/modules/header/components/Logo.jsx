@@ -1,10 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 import logo from 'images/icons/logo.svg';
-import { Wrap } from '../../common/Wrap';
-// import { NavLink } from 'react-router-dom';
-import { StyledNavLink } from '../../common/StyledNavLink';
-import { color } from 'utils/theme';
-import { deviceScreen } from 'utils/theme';
+import { Wrap, StyledNavLink } from 'modules/common';
+import { color, deviceScreen } from 'utils/stylesVars';
 
 const rotateAnimation = keyframes`
   0% {
@@ -28,7 +25,7 @@ const Title = styled.h1`
   margin: 0;
   padding: 0;
 
-  ${deviceScreen.T} {
+  ${deviceScreen.M} {
     display: block;
     font-size: 30px;
     line-height: 35px;

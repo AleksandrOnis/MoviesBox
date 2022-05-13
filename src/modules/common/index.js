@@ -6,5 +6,18 @@ import { Notify } from './Notify';
 import { StyledNavLink } from './StyledNavLink';
 import { Wrap } from './Wrap';
 import { Main } from './Main';
+import { ErrorBoundary } from './ErrorBoundary';
+import { Container } from './Container';
 
-export { GlobalStyle, Icon, Loader, Modal, Notify, StyledNavLink, Wrap, Main };
+export {
+  GlobalStyle,
+  Icon,
+  Loader,
+  Modal,
+  Notify,
+  StyledNavLink,
+  Wrap,
+  Main,
+  ErrorBoundary,
+  Container,
+};

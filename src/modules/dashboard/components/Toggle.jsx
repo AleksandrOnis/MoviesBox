@@ -1,18 +1,20 @@
 import styled from 'styled-components';
 import { WiDaySunny, WiMoonWaningCrescent4 } from 'react-icons/wi';
-import { color } from 'utils/theme';
+import { color } from 'utils/stylesVars';
 
 const IconSun = styled(WiDaySunny)`
   position: absolute;
-  top: 25%;
+  top: 50%;
   left: 9%;
+  transform: translateY(-50%);
   color: yellow;
 `;
 
 const IconMoon = styled(WiMoonWaningCrescent4)`
   position: absolute;
-  top: 25%;
+  top: 50%;
   right: 4%;
+  transform: translateY(-50%);
   color: lightgray;
 `;
 
@@ -21,7 +23,6 @@ const ToggleWrap = styled.div`
   justify-content: center;
   align-items: baseline;
   padding: 10px;
-  height: 50px;
   cursor: pointer;
 `;
 
@@ -35,24 +36,22 @@ const StyledToggle = styled.label`
   pointer-events: none;
 
   input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+    display: none;
   }
 
-  .slider:after {
-    position: absolute;
+  span:after {
     content: '';
+    position: absolute;
     height: 31px;
     width: 31px;
     left: 29px;
-    background-color: ${color.accent};
     border-radius: 50%;
     transition: 0.1s;
     top: -1px;
+    background-color: ${color.accent};
   }
 
-  input:checked + .slider:after {
+  input:checked + span:after {
     transform: translateX(-31px);
     background-color: ${color.accent};
   }
@@ -69,7 +68,7 @@ export const Toggle = ({ onChange }) => {
             onChange();
           }}
         />
-        <span className="slider" />
+        <span />
         <IconSun />
         <IconMoon />
       </StyledToggle>

@@ -2,7 +2,7 @@ import { useEffect, useContext } from 'react';
 import { SearchBar, Toggle } from './components';
 import { ThemeContext } from 'context';
 
-export const Dashboard = () => {
+export const Dashboard = ({ color }) => {
   const { theme, setTheme } = useContext(ThemeContext);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export const Dashboard = () => {
 
   return (
     <>
-      <SearchBar />
+      <SearchBar color={color} />
       <Toggle active={theme} onChange={() => setTheme(!theme)} />
     </>
   );

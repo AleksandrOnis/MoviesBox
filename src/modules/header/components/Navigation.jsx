@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { StyledNavLink } from '../../common/StyledNavLink';
 import { NavLink } from 'react-router-dom';
-import { color } from 'utils/theme';
+import { color } from 'utils/stylesVars';
 
 const NavList = styled.ul`
   padding: 0;
@@ -12,6 +11,7 @@ const NavList = styled.ul`
 `;
 
 const StyledNav = styled(NavLink)`
+  color: #fff;
   :not(:last-child) {
     margin-right: 40px;
   }

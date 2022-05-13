@@ -2,18 +2,23 @@ import styled from 'styled-components';
 import { moviesAPI } from 'api';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
-import { Loader, Modal } from 'components/common';
+import { Loader, Modal, Container } from 'modules/common';
 import { MovieCard } from './MovieCard';
-import { deviceScreen } from 'utils/theme';
+import { deviceScreen } from 'utils/stylesVars';
 
 const SectionGallery = styled.section``;
 const MoviesList = styled.ul`
-  ${deviceScreen.T} {
+  margin-left: auto;
+  margin-right: auto;
+  ${deviceScreen.M} {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 30px;
   }
-  ${deviceScreen.D} {
+  ${deviceScreen.L} {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  ${deviceScreen.XL} {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 `;
@@ -40,25 +45,20 @@ export const Gallery = () => {
     if (movies.length > 0) {
     }
   }, [movies]);
-
-  return movies.length > 0 ? (
+  return (
     <SectionGallery>
-      <MoviesList>
-        {movies.map(movie => {
-          return <MovieCard setModalIsOpen={setModalIsOpen} key={movie.id} movie={movie} />;
-        })}
-      </MoviesList>
-      <Modal
-        isOpen={modalIsOpen}
-        setIsOpen={setModalIsOpen}
-        justify="start"
-        title="Movie description"
-        mb="15px"
-        w="540px"
-      ></Modal>
+      <Container>
+        {movies.length > 0 ? (
+          <MoviesList>
+            {movies.map(movie => {
+              return <MovieCard setModalIsOpen={setModalIsOpen} key={movie.id} movie={movie} />;
+            })}
+          </MoviesList>
+        ) : (
+          <Loader />
+        )}
+      </Container>
+      <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}></Modal>
     </SectionGallery>
-  ) : (
-    <Loader />
-    // isLoading
   );
 };

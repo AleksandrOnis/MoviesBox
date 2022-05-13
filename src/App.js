@@ -1,6 +1,6 @@
 import 'react-toastify/dist/ReactToastify.css';
-import { Notify } from 'components/common/Notify';
-import { GlobalStyle, Loader } from 'components/common';
+import { Notify } from 'modules/common/Notify';
+import { GlobalStyle, Loader } from 'modules/common';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { ThemeContext } from 'context';

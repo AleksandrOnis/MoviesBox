@@ -12,15 +12,3 @@ export const lightTheme = {
   body: '#fff',
   textColor: '#000',
 };
-
-export const color = {
-  accent: '#ff6b01',
-  dark: '#444',
-  light: '#fff',
-};
-
-export const deviceScreen = {
-  M: '@media screen and (max-width: 767.9px)',
-  T: '@media screen and (min-width: 768px)',
-  D: '@media screen and (min-width: 1024px)',
-};

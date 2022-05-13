@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { BiSearchAlt2 } from 'react-icons/bi';
-import { color } from 'utils/theme';
+import { color } from 'utils/stylesVars';
 
 const Form = styled.form`
   display: flex;
@@ -15,27 +15,23 @@ const Label = styled.label`
 const Input = styled.input`
   padding: 5px;
   width: 140px;
-  color: #fff;
-  font-size: 12px;
+
   line-height: 1.24;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  border: none;
-  border-bottom: 1px solid ${color.accent};
-  background: transparent;
-  outline: none;
   letter-spacing: 0.02em;
 
+  border: none;
+  border-bottom: 1px solid ${color.accent};
+  color: #fff;
+  outline: none;
+  background: transparent;
+
+  // bg autoComplete
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
-    -webkit-transition: 'color 9999s ease-out, #000 9999s ease-out';
-    -webkit-transition-delay: 9999s;
-  }
-
-  :hover,
-  :focus {
+    transition: 'color 9999s ease-out, #000 9999s ease-out';
+    transition-delay: 9999s;
   }
 
   ::placeholder {
@@ -54,7 +50,7 @@ const Button = styled.button`
 
 const SearchIcon = styled(BiSearchAlt2)``;
 
-const onFormSubmit = event => {
+const handleSubmit = event => {
   event.preventDefault();
 
   // if (searchQuery.trim() === '') {
@@ -66,15 +62,13 @@ const onFormSubmit = event => {
 };
 
 export const SearchBar = () => {
-  // const [searchFilm, setSearchFilm] = useContext(SearchFilmContext);
-  // console.log(searchFilm);
   return (
     <Form>
       <Label>
         <Input
+          autoComplete="off"
           type="text"
           name="searchQuery"
-          autocomplete="off"
           placeholder="Search movies..."
           required
         />

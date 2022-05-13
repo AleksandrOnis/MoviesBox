@@ -1,48 +1,40 @@
 import styled from 'styled-components';
 import noPoster from 'images/no-poster.jpg';
+import { cubicBezier } from 'utils/stylesVars';
 
 const Card = styled.li`
-  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-radius: 5px;
-  font-size: 12px;
+  padding: 0 10px 10px 10px;
+  width: 280px;
   line-height: 1.33;
-  font-weight: 400;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.02em;
 
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 5px;
+  cursor: pointer;
+
+  transition: transform 250ms ${cubicBezier}, box-shadow 250ms ${cubicBezier};
 
   :hover,
   :focus {
     transform: scale(1.01);
-    transform: scale(1.01);
-    box-shadow: 8px 8px 10px rgba(37, 37, 37, 0.6);
     box-shadow: 8px 8px 10px rgba(37, 37, 37, 0.6);
   }
 `;
 const Thumb = styled.div`
-  /* background-color: #a5a5a5; */
-  /* background: url(${noPoster} cover no-repeat); */
+  /* background: url(${noPoster}) cover no-repeat; */
   border-radius: 5px;
-  width: 100%;
-  height: 398px;
+  height: 380px;
+
   overflow: hidden;
   pointer-events: none;
 `;
 const Image = styled.img`
+  width: 280px;
+  height: 400px;
   border-radius: 5px;
-  -o-object-fit: cover;
-  object-fit: cover;
-  height: 100%;
+  object-fit: fill;
 `;
 const WrapTitle = styled.div`
   display: flex;

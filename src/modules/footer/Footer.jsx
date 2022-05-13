@@ -1,17 +1,19 @@
 import styled from 'styled-components';
-import { Wrap } from 'components/common/Wrap';
-import { color } from 'utils/theme';
+import { Wrap } from 'modules/common/Wrap';
+import { color } from 'utils/stylesVars';
+import { deviceScreen } from 'utils/stylesVars';
 
 const StyledFooter = styled.footer`
   padding: 20px;
-  font-size: 12px;
   line-height: 14px;
   color: ${color.light};
   letter-spacing: 0.1em;
   background-color: #292929;
-`;
 
-const FooterWrap = styled(Wrap)``;
+  ${deviceScreen.L} {
+    font-size: 14px;
+  }
+`;
 
 const AccentWrap = styled.span`
   color: ${color.accent};
@@ -27,7 +29,7 @@ const Text = styled.p`
 export const Footer = () => {
   return (
     <StyledFooter>
-      <FooterWrap fd="row" jc="center">
+      <Wrap jc="center">
         <Text>
           <AccentWrap>&copy;</AccentWrap> 2021
         </Text>
@@ -37,7 +39,7 @@ export const Footer = () => {
           <AccentWrap> by </AccentWrap>
           Oleksandr Onyshchenko
         </Text>
-      </FooterWrap>
+      </Wrap>
     </StyledFooter>
   );
 };

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { Loader, Main, Wrap } from 'components/common';
-import { Header } from 'components/header/Header';
-import { Dashboard } from 'components/dashboard/Dashboard';
-import { Footer } from 'components/footer/Footer';
-import { Gallery } from 'components/gallery/Gallery';
+import { Loader, Main, Wrap } from 'modules/common';
+import { Header } from 'modules/header/Header';
+import { Dashboard } from 'modules/dashboard/Dashboard';
+import { Footer } from 'modules/footer/Footer';
+import { Gallery } from 'modules/gallery/Gallery';
 
 const isLoading = false;
 // const isLoading = true;
