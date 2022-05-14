@@ -8,6 +8,7 @@ import { Wrap } from './Wrap';
 import { Main } from './Main';
 import { ErrorBoundary } from './ErrorBoundary';
 import { Container } from './Container';
+import { Spinner } from './Spinner';
 
 export {
   GlobalStyle,
@@ -20,4 +21,5 @@ export {
   Main,
   ErrorBoundary,
   Container,
+  Spinner,
 };

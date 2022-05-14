@@ -1,6 +1,6 @@
 import 'react-toastify/dist/ReactToastify.css';
 import { Notify } from 'modules/common/Notify';
-import { GlobalStyle, Loader } from 'modules/common';
+import { GlobalStyle, Spinner } from 'modules/common';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { ThemeContext } from 'context';
@@ -19,7 +19,7 @@ function App() {
     <ThemeProvider theme={theme ? darkTheme : lightTheme}>
       <ThemeContext.Provider value={{ theme, setTheme }}>
         <GlobalStyle />
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Spinner />}>
           <Routes>
             <Route path="home" element={<HomePage />} />
             <Route path="library" element={<LibraryPage />} />
