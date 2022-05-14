@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { deviceScreen } from 'utils/stylesVars';
 import noPoster from 'images/film.jpg';
-import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import { moviesAPI } from 'api';
 
 const Container = styled.div`
@@ -92,9 +90,7 @@ const Description = styled.div`
   line-height: 1.7;
 `;
 
-export const DescriptionMovie = () => {
-  const { movieId } = useParams();
-  const [movie, setMovie] = useState({});
+export const DescriptionMovie = ({ movie }) => {
   const {
     title = '',
     genres = '',
@@ -104,35 +100,20 @@ export const DescriptionMovie = () => {
     overview = '',
   } = movie;
 
-  useEffect(() => {
-    getMovieDetails(752623);
-  }, []);
-
-  async function getMovieDetails(id) {
-    try {
-      const data = await moviesAPI.getMovieById(id);
-      setMovie(data);
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
-
   return (
-    movie && (
-      <Container>
-        <WrapPoster>
-          <Poster
-            src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-            alt={`No poster for movie ${title}`}
-          />
-        </WrapPoster>
-        <WrapContent>
-          <Title>{title}</Title>
-          <Info></Info>
-          <About>About</About>
-          <Description>{overview}</Description>
-        </WrapContent>
-      </Container>
-    )
+    <Container>
+      <WrapPoster>
+        <Poster
+          src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+          alt={`No poster for movie ${title}`}
+        />
+      </WrapPoster>
+      <WrapContent>
+        <Title>{title}</Title>
+        <Info></Info>
+        <About>About</About>
+        <Description>{overview}</Description>
+      </WrapContent>
+    </Container>
   );
 };

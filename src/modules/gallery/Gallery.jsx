@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { moviesAPI } from 'api';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
-import { Loader, Modal, Container, DescriptionMovie } from 'modules/common';
+import { Loader, Modal, Container, DescriptionMovie, Main, Spinner } from 'modules/common';
 import { MovieCard } from './MovieCard';
 import { deviceScreen } from 'utils/stylesVars';
 
@@ -25,6 +25,7 @@ const MoviesList = styled.ul`
 
 export const Gallery = () => {
   const [movies, setMovies] = useState([]);
+  const [movieById, setMovieById] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   async function getTrendingMovies(page = 1) {
@@ -33,12 +34,31 @@ export const Gallery = () => {
       setMovies(data.results);
     } catch (error) {
       toast.error(error);
-    } finally {
     }
   }
 
+  async function getMovieById(id) {
+    try {
+      const data = await moviesAPI.getMovieById(id);
+      setMovieById(data);
+    } catch (error) {
+      toast.error(error);
+    }
+  }
+
+  const handleclick = event => {
+    if (event.target.nodeName === 'LI') {
+      const movieId = event.target.dataset.id;
+      getMovieById(movieId);
+      console.log(movieId);
+    }
+  };
+
   useEffect(() => {
     getTrendingMovies();
+    const refMain = document.querySelector('main');
+    refMain.addEventListener('click', handleclick);
+    return () => refMain.removeEventListener('click', handleclick);
   }, []);
 
   useEffect(() => {
@@ -48,17 +68,22 @@ export const Gallery = () => {
   return (
     <SectionGallery>
       <Container>
-        {movies.length && (
+        {movies.length ? (
           <MoviesList>
             {movies.map(movie => {
               return <MovieCard setModalIsOpen={setModalIsOpen} key={movie.id} movie={movie} />;
             })}
           </MoviesList>
+        ) : (
+          <Spinner />
         )}
       </Container>
-      <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
-        <DescriptionMovie />
-      </Modal>
+
+      {movieById && (
+        <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
+          <DescriptionMovie movie={movieById} />
+        </Modal>
+      )}
     </SectionGallery>
   );
 };

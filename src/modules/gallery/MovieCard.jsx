@@ -78,10 +78,11 @@ export const MovieCard = ({ movie, setModalIsOpen }) => {
     release_date = 'xxxx',
     vote_average = 'x.x',
     poster_path = '',
+    id = '',
   } = movie;
 
   return (
-    <Card onClick={() => setModalIsOpen(true)}>
+    <Card onClick={() => setModalIsOpen(true)} data-id={id}>
       <Thumb>
         {poster_path ? (
           <Image
