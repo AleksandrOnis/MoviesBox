@@ -14,6 +14,12 @@ const GlobalStyled = createGlobalStyle`
     font-size: 12px;
   }
 
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
   ul {
     padding: 0;
   }

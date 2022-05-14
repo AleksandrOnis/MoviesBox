@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { moviesAPI } from 'api';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
-import { Loader, Modal, Container } from 'modules/common';
+import { Loader, Modal, Container, DescriptionMovie } from 'modules/common';
 import { MovieCard } from './MovieCard';
 import { deviceScreen } from 'utils/stylesVars';
 
@@ -48,17 +48,17 @@ export const Gallery = () => {
   return (
     <SectionGallery>
       <Container>
-        {movies.length > 0 ? (
+        {movies.length && (
           <MoviesList>
             {movies.map(movie => {
               return <MovieCard setModalIsOpen={setModalIsOpen} key={movie.id} movie={movie} />;
             })}
           </MoviesList>
-        ) : (
-          <Loader />
         )}
       </Container>
-      <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}></Modal>
+      <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
+        <DescriptionMovie />
+      </Modal>
     </SectionGallery>
   );
 };

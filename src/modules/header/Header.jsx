@@ -4,7 +4,7 @@ import { Logo, Navigation } from './components';
 import bgImgD from 'images/header-bg/bgimg1024@2x.jpg';
 import bgImgT from 'images/header-bg/bgimg760@2x.jpg';
 import bgImgM from 'images/header-bg/bgimg@2x.jpg';
-import { deviceScreen } from 'utils/stylesVars';
+import { deviceScreen, color } from 'utils/stylesVars';
 import { Login } from './components/authMenu/Authorization';
 
 const StyledHeader = styled.header`
@@ -18,6 +18,7 @@ const StyledHeader = styled.header`
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+  background-color: ${color.bg};
   background: url(${bgImgM}) center no-repeat;
   background-size: cover;
   ${deviceScreen.M} {

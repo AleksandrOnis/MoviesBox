@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 import { Wrap } from 'modules/common/Wrap';
-import { color } from 'utils/stylesVars';
-import { deviceScreen } from 'utils/stylesVars';
+import { deviceScreen, color } from 'utils/stylesVars';
 
 const StyledFooter = styled.footer`
   padding: 20px;
   line-height: 14px;
   color: ${color.light};
   letter-spacing: 0.1em;
-  background-color: #292929;
+  background-color: ${color.bg};
 
   ${deviceScreen.L} {
     font-size: 14px;

@@ -2,6 +2,7 @@ export const color = {
   accent: '#ff6b01',
   dark: '#444',
   light: '#fff',
+  bg: '#292929',
 };
 
 export const deviceScreen = {

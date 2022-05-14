@@ -9,6 +9,7 @@ import { Main } from './Main';
 import { ErrorBoundary } from './ErrorBoundary';
 import { Container } from './Container';
 import { Spinner } from './Spinner';
+import { DescriptionMovie } from './DescriptionMovie';
 
 export {
   GlobalStyle,
@@ -22,4 +23,5 @@ export {
   ErrorBoundary,
   Container,
   Spinner,
+  DescriptionMovie,
 };
