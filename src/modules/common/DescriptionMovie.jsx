@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { deviceScreen } from 'utils/stylesVars';
 import noPoster from 'images/film.jpg';
 import { moviesAPI } from 'api';
+import ReactPlayer from 'react-player';
 
 const Container = styled.div`
   width: 280px;
@@ -59,7 +60,7 @@ const WrapPoster = styled.div`
   }
 `;
 const Poster = styled.img`
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
   border-radius: 5px;
 `;
@@ -90,7 +91,7 @@ const Description = styled.div`
   line-height: 1.7;
 `;
 
-export const DescriptionMovie = ({ movie }) => {
+export const DescriptionMovie = ({ movie = {} }) => {
   const {
     title = '',
     genres = '',
@@ -98,8 +99,19 @@ export const DescriptionMovie = ({ movie }) => {
     vote_average = 'x.x',
     poster_path = '',
     overview = '',
+    id = '',
   } = movie;
+  let trailer = '';
 
+  const handleClick = () =>
+    moviesAPI
+      .getTrailerById(id)
+      .then(response => {
+        if (response.results?.length > 0) trailer = response.results;
+        console.log(trailer);
+      })
+      .catch();
+  handleClick();
   return (
     <Container>
       <WrapPoster>
@@ -111,7 +123,11 @@ export const DescriptionMovie = ({ movie }) => {
       <WrapContent>
         <Title>{title}</Title>
         <Info></Info>
-        <About>About</About>
+        <About>About </About>
+        {/* <p onClick={handleClick}> */}
+        {/* trailer */}
+        <ReactPlayer url={trailer} />
+        {/* </p> */}
         <Description>{overview}</Description>
       </WrapContent>
     </Container>

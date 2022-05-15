@@ -71,7 +71,7 @@ const Vote = styled.span`
   background-color: #ff6b01;
 `;
 
-export const MovieCard = ({ movie, setModalIsOpen }) => {
+export const MovieCard = ({ movie, setModalIsOpen, setId }) => {
   const {
     title = '',
     genres = '',
@@ -82,7 +82,12 @@ export const MovieCard = ({ movie, setModalIsOpen }) => {
   } = movie;
 
   return (
-    <Card onClick={() => setModalIsOpen(true)} data-id={id}>
+    <Card
+      onClick={() => {
+        setModalIsOpen(true);
+        setId(id);
+      }}
+    >
       <Thumb>
         {poster_path ? (
           <Image

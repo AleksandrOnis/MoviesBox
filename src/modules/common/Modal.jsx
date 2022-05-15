@@ -51,7 +51,9 @@ export const Modal = ({ children, isOpen, setIsOpen, w, h, mb = 40, jc, ai, fd }
       }
     };
     window.addEventListener('keydown', close);
-    return () => window.removeEventListener('keydown', close);
+    return () => {
+      window.removeEventListener('keydown', close);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

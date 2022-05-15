@@ -25,6 +25,7 @@ const MoviesList = styled.ul`
 
 export const Gallery = () => {
   const [movies, setMovies] = useState([]);
+  const [Id, setId] = useState(null);
   const [movieById, setMovieById] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -46,32 +47,28 @@ export const Gallery = () => {
     }
   }
 
-  const handleclick = event => {
-    if (event.target.nodeName === 'LI') {
-      const movieId = event.target.dataset.id;
-      getMovieById(movieId);
-      console.log(movieId);
-    }
-  };
-
   useEffect(() => {
     getTrendingMovies();
-    const refMain = document.querySelector('main');
-    refMain.addEventListener('click', handleclick);
-    return () => refMain.removeEventListener('click', handleclick);
   }, []);
 
   useEffect(() => {
-    if (movies.length > 0) {
-    }
-  }, [movies]);
+    getMovieById(Id);
+  }, [Id]);
+
   return (
     <SectionGallery>
       <Container>
         {movies.length ? (
           <MoviesList>
             {movies.map(movie => {
-              return <MovieCard setModalIsOpen={setModalIsOpen} key={movie.id} movie={movie} />;
+              return (
+                <MovieCard
+                  setModalIsOpen={setModalIsOpen}
+                  key={movie.id}
+                  movie={movie}
+                  setId={setId}
+                />
+              );
             })}
           </MoviesList>
         ) : (

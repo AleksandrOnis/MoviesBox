@@ -32,10 +32,6 @@ export const getMovieById = function (id) {
   return handleFetch(`/movie/${id}`);
 };
 
-export const getSimilarMovie = function (id) {
-  return handleFetch(`/movie/${id}/similar`);
-};
-
 export const getTrailerById = function (id) {
   return handleFetch(`/movie/${id}/videos`);
 };
