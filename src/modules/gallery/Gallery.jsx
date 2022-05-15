@@ -27,6 +27,7 @@ export const Gallery = () => {
   const [movies, setMovies] = useState([]);
   const [Id, setId] = useState(null);
   const [movieById, setMovieById] = useState(null);
+  const [genresList, setGenresList] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   async function getTrendingMovies(page = 1) {
@@ -34,7 +35,8 @@ export const Gallery = () => {
       const data = await moviesAPI.getTrendingMovies(page);
       setMovies(data.results);
     } catch (error) {
-      toast.error(error);
+      // console.log(error.message);
+      // toast.error('Sorry, server not resonding');
     }
   }
 
@@ -43,12 +45,26 @@ export const Gallery = () => {
       const data = await moviesAPI.getMovieById(id);
       setMovieById(data);
     } catch (error) {
-      toast.error(error);
+      // console.log(error.message);
+      // toast.error('Sorry, server not resonding');
     }
   }
 
+  async function getGenreslist() {
+    try {
+      const response = await moviesAPI.getGenresList();
+      setGenresList([...response.genres]);
+    } catch (error) {
+      // console.log(error.message);
+      // toast.error('Sorry, server not resonding');
+    }
+  }
+
+  const genresMovie = arrayGenres => genresList.filter(genre => arrayGenres.includes(genre.id));
+
   useEffect(() => {
     getTrendingMovies();
+    getGenreslist();
   }, []);
 
   useEffect(() => {
@@ -67,6 +83,7 @@ export const Gallery = () => {
                   key={movie.id}
                   movie={movie}
                   setId={setId}
+                  genresMovie={genresMovie}
                 />
               );
             })}
@@ -78,7 +95,7 @@ export const Gallery = () => {
 
       {movieById && (
         <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
-          <DescriptionMovie movie={movieById} />
+          <DescriptionMovie movie={movieById} genresMovie={genresMovie} />
         </Modal>
       )}
     </SectionGallery>

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import noPoster from 'images/no-poster.jpg';
 import { cubicBezier } from 'utils/stylesVars';
+import { titlesGenres } from 'utils/genres';
 
 const Card = styled.li`
   margin-left: auto;
@@ -59,27 +60,26 @@ const WrapInfo = styled.div`
   color: #ff6b01;
   pointer-events: none;
 `;
-const Genres = styled.span``;
 const Vote = styled.span`
   display: inline-block;
   text-align: center;
   padding-top: 2px;
   width: 36px;
-  height: 16px;
   border-radius: 5px;
   color: #ffffff;
   background-color: #ff6b01;
 `;
 
-export const MovieCard = ({ movie, setModalIsOpen, setId }) => {
+export const MovieCard = ({ movie, setModalIsOpen, setId, genresMovie }) => {
   const {
     title = '',
-    genres = '',
     release_date = 'xxxx',
     vote_average = 'x.x',
     poster_path = '',
     id = '',
   } = movie;
+  const genresIds = genresMovie(movie.genre_ids);
+  const genres = titlesGenres(genresIds);
 
   return (
     <Card
@@ -103,8 +103,7 @@ export const MovieCard = ({ movie, setModalIsOpen, setId }) => {
         <Year>{Number.parseInt(release_date)}</Year>
       </WrapTitle>
       <WrapInfo>
-        {/* <Genres>{ genres }</Genres> */}
-        <Year>{Number.parseInt(release_date)}</Year>
+        {genres}
         <Vote>{vote_average}</Vote>
       </WrapInfo>
     </Card>

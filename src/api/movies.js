@@ -1,7 +1,5 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
-//https://api.themoviedb.org/3/genre/movie/list?api_key=590a6f37621ff65548240da14486f6b8&language=en-US
-//Объект со списком жанров
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 axios.defaults.headers.common['Authorization'] =
@@ -34,4 +32,8 @@ export const getMovieById = function (id) {
 
 export const getTrailerById = function (id) {
   return handleFetch(`/movie/${id}/videos`);
+};
+
+export const getGenresList = function () {
+  return handleFetch(`/genre/movie/list?official`);
 };
