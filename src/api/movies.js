@@ -13,7 +13,7 @@ const handleFetch = async function (request) {
     const response = await axios.get(request);
     return response.data;
   } catch (error) {
-    toast.error(error);
+    // toast.error(error.message);
     throw new Error(error.response.data.status_message);
   } finally {
     // loading is finished

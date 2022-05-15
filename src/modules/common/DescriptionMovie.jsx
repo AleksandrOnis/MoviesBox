@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { deviceScreen } from 'utils/stylesVars';
+import { color, deviceScreen } from 'utils/stylesVars';
 import noPoster from 'images/film.jpg';
 import { moviesAPI } from 'api';
 import ReactPlayer from 'react-player';
+import { toast } from 'react-toastify';
 
 const Container = styled.div`
   width: 280px;
@@ -86,8 +87,24 @@ const About = styled.p`
   text-transform: uppercase;
 `;
 
+const Trailer = styled.span`
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 10px;
+  text-transform: uppercase;
+  border: 1px solid;
+  border-radius: 10px;
+  cursor: pointer;
+
+  :hover,
+  :focus {
+    color: ${color.accent};
+    border-color: ${color.accent};
+  }
+`;
+
 const Description = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   line-height: 1.7;
 `;
 
@@ -101,17 +118,28 @@ export const DescriptionMovie = ({ movie = {} }) => {
     overview = '',
     id = '',
   } = movie;
-  let trailer = '';
+  let video = null;
 
-  const handleClick = () =>
-    moviesAPI
-      .getTrailerById(id)
-      .then(response => {
-        if (response.results?.length > 0) trailer = response.results;
-        console.log(trailer);
-      })
-      .catch();
-  handleClick();
+  async function getTrailer(id) {
+    try {
+      const response = await moviesAPI.getTrailerById(id);
+      if (response.results?.length > 0) {
+        const trailers = response.results;
+        const officialTrailers = trailers.find(
+          trailer => trailer.name.toLowerCase() === 'official trailer',
+        );
+        officialTrailers ? (video = officialTrailers) : (video = trailers[0]);
+        console.log('res', video);
+      } else toast.error('Sorry, trailer not found');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleClick = () => {
+    getTrailer(id);
+  };
+
   return (
     <Container>
       <WrapPoster>
@@ -124,12 +152,10 @@ export const DescriptionMovie = ({ movie = {} }) => {
         <Title>{title}</Title>
         <Info></Info>
         <About>About </About>
-        {/* <p onClick={handleClick}> */}
-        {/* trailer */}
-        <ReactPlayer url={trailer} />
-        {/* </p> */}
         <Description>{overview}</Description>
+        <Trailer onClick={handleClick}>Watch trailer</Trailer>
       </WrapContent>
+      {/* <ReactPlayer url={trailer} /> */}
     </Container>
   );
 };
