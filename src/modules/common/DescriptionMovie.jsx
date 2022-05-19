@@ -87,20 +87,8 @@ const About = styled.p`
   text-transform: uppercase;
 `;
 
-const Trailer = styled.span`
-  display: inline-block;
-  margin-bottom: 10px;
-  padding: 10px;
-  text-transform: uppercase;
-  border: 1px solid;
-  border-radius: 10px;
-  cursor: pointer;
-
-  :hover,
-  :focus {
-    color: ${color.accent};
-    border-color: ${color.accent};
-  }
+const TrailerWrap = styled.div`
+  width: 100%;
 `;
 
 const Description = styled.div`
@@ -108,7 +96,7 @@ const Description = styled.div`
   line-height: 1.7;
 `;
 
-export const DescriptionMovie = ({ movie = {} }) => {
+export const DescriptionMovie = ({ movie = {}, trailer }) => {
   const {
     title = '',
     genres = '',
@@ -119,26 +107,6 @@ export const DescriptionMovie = ({ movie = {} }) => {
     id = '',
   } = movie;
   let video = null;
-
-  async function getTrailer(id) {
-    try {
-      const response = await moviesAPI.getTrailerById(id);
-      if (response.results?.length > 0) {
-        const trailers = response.results;
-        const officialTrailers = trailers.find(
-          trailer => trailer.name.toLowerCase() === 'official trailer',
-        );
-        officialTrailers ? (video = officialTrailers) : (video = trailers[0]);
-        console.log('res', video);
-      } else toast.error('Sorry, trailer not found');
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const handleClick = () => {
-    getTrailer(id);
-  };
 
   return (
     <Container>
@@ -153,9 +121,10 @@ export const DescriptionMovie = ({ movie = {} }) => {
         <Info></Info>
         <About>About </About>
         <Description>{overview}</Description>
-        <Trailer onClick={handleClick}>Watch trailer</Trailer>
+        <TrailerWrap>
+          <ReactPlayer width="100%" controls url={`https://www.youtube.com/watch?v=${trailer}`} />
+        </TrailerWrap>
       </WrapContent>
-      {/* <ReactPlayer url={trailer} /> */}
     </Container>
   );
 };

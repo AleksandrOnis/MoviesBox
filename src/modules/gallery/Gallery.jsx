@@ -26,6 +26,7 @@ const MoviesList = styled.ul`
 export const Gallery = () => {
   const [movies, setMovies] = useState([]);
   const [Id, setId] = useState(null);
+  const [trailer, setTrailer] = useState('');
   const [movieById, setMovieById] = useState(null);
   const [genresList, setGenresList] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -50,6 +51,21 @@ export const Gallery = () => {
     }
   }
 
+  async function getTrailer(id) {
+    try {
+      const response = await moviesAPI.getTrailerById(id);
+      if (response.results?.length > 0) {
+        const trailers = response.results;
+        const officialTrailers = trailers.find(
+          trailer => trailer.name.toLowerCase() === 'official trailer',
+        );
+        officialTrailers ? setTrailer(officialTrailers.key) : setTrailer(trailers[0].key);
+      } else toast.error('Sorry, trailer not found');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function getGenreslist() {
     try {
       const response = await moviesAPI.getGenresList();
@@ -69,6 +85,7 @@ export const Gallery = () => {
 
   useEffect(() => {
     getMovieById(Id);
+    getTrailer(Id);
   }, [Id]);
 
   return (
@@ -95,7 +112,7 @@ export const Gallery = () => {
 
       {movieById && (
         <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
-          <DescriptionMovie movie={movieById} genresMovie={genresMovie} />
+          <DescriptionMovie movie={movieById} genresMovie={genresMovie} trailer={trailer} />
         </Modal>
       )}
     </SectionGallery>
