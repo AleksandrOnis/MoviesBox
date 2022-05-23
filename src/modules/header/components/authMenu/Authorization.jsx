@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { color } from 'utils/stylesVars';
+import { NavLink } from 'react-router-dom';
 
-const StyledLogin = styled.div`
+const StyledNavLink = styled(NavLink)`
   padding: 10px 20px 10px 20px;
   font-size: 18px;
   line-height: 1.24;
@@ -15,6 +16,6 @@ const StyledLogin = styled.div`
   }
 `;
 
-export const Login = () => {
-  return <StyledLogin>Login</StyledLogin>;
+export const Authorization = () => {
+  return <StyledNavLink to="/login">Login</StyledNavLink>;
 };

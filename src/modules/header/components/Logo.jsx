@@ -38,7 +38,7 @@ const Title = styled.h1`
   }
 `;
 
-export const Logo = ({ title }) => {
+export const Logo = ({ title = 'MoviesBox' }) => {
   return (
     <Wrap fd="row" g="10px">
       <StyledLogo src={logo} />

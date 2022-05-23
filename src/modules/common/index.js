@@ -10,6 +10,8 @@ import { ErrorBoundary } from './ErrorBoundary';
 import { Container } from './Container';
 import { Spinner } from './Spinner';
 import { DescriptionMovie } from './DescriptionMovie';
+import { Button } from './Button';
+import { Input } from './Input';
 
 export {
   GlobalStyle,
@@ -24,4 +26,6 @@ export {
   Container,
   Spinner,
   DescriptionMovie,
+  Button,
+  Input,
 };

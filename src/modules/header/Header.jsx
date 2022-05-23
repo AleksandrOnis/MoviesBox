@@ -5,7 +5,7 @@ import bgImgD from 'images/header-bg/bgimg1024@2x.jpg';
 import bgImgT from 'images/header-bg/bgimg760@2x.jpg';
 import bgImgM from 'images/header-bg/bgimg@2x.jpg';
 import { deviceScreen, color } from 'utils/stylesVars';
-import { Login } from './components/authMenu/Authorization';
+import { Authorization } from './components/authMenu/Authorization';
 
 const StyledHeader = styled.header`
   display: flex;
@@ -37,9 +37,9 @@ export const Header = ({ children }) => {
   return (
     <StyledHeader>
       <Wrap jc="space-between">
-        <Logo title="Filmoteka" />
+        <Logo />
         <Navigation />
-        <Login />
+        <Authorization />
       </Wrap>
       {children}
     </StyledHeader>
