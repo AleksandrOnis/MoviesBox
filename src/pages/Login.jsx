@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import { Container } from 'modules/common';
+import { Button, Container } from 'modules/common';
 import { Logo } from 'modules/header/components';
 import { Hero } from 'modules/common/Hero';
 import bgImage from 'images/window-login.jpg';
 import { LoginForm } from 'modules/login/LoginForm';
 import { color } from 'utils/stylesVars';
 import { deviceScreen } from 'utils/stylesVars';
+import { useNavigate } from 'react-router-dom';
 
 const StyledContainer = styled(Container)`
   display: flex;
@@ -28,6 +29,7 @@ const FormWrap = styled.div`
 `;
 
 export const Login = () => {
+  const navigate = useNavigate();
   return (
     <>
       <StyledContainer>
@@ -35,6 +37,9 @@ export const Login = () => {
         <FormWrap>
           <Logo />
           <LoginForm />
+          <Button type="button" onClick={() => navigate('/registration')}>
+            Registration
+          </Button>
         </FormWrap>
       </StyledContainer>
     </>

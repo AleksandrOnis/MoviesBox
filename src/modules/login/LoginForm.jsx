@@ -3,12 +3,10 @@ import { Input, Button } from 'modules/common';
 import { useState } from 'react';
 import mail from 'images/authorization/mail.svg';
 import lock from 'images/authorization/lock.svg';
-import { useNavigate } from 'react-router-dom';
 
 const Form = styled.form``;
 
 export const LoginForm = () => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -37,9 +35,6 @@ export const LoginForm = () => {
       />
       <Button type="submit" acc disabled={!email || !password}>
         Login
-      </Button>
-      <Button type="button" onClick={() => navigate('registration')}>
-        Registration
       </Button>
     </Form>
   );
