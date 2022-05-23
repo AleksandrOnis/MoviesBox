@@ -14,15 +14,17 @@ const StyledButton = styled.button`
   color: #fff;
   border: 1px solid ${color.accent};
   border-radius: 20px;
-  background-color: ${acc => (acc ? 'transparent' : color.accent)};
+  background-color: ${({ accent }) => (accent ? color.accent : 'transparent')};
 
   cursor: pointer;
 
   :hover,
   :focus {
+    transform: scale(1.05);
+    box-shadow: 4px 4px 5px rgba(37, 37, 37, 0.6);
   }
 `;
 
-export const Button = ({ children, acc, ...otherProps }) => {
+export const Button = ({ children, ...otherProps }) => {
   return <StyledButton {...otherProps}>{children}</StyledButton>;
 };

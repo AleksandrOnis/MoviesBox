@@ -37,7 +37,7 @@ export const Header = ({ children }) => {
   return (
     <StyledHeader>
       <Wrap jc="space-between">
-        <Logo />
+        <Logo mobileHidden />
         <Navigation />
         <Authorization />
       </Wrap>

@@ -3,6 +3,7 @@ export const color = {
   dark: '#444',
   light: '#fff',
   bg: '#292929',
+  bgLight: '#444444',
 };
 
 export const deviceScreen = {

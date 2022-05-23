@@ -6,10 +6,12 @@ const InputWrap = styled.div`
 `;
 
 const StyledInput = styled.input`
-  padding: 5px;
-  width: 140px;
-
-  line-height: 1.24;
+  padding: 5px 5px 5px 40px;
+  width: 280px;
+  margin-bottom: ${({ mb }) => (mb ? mb : '0px')};
+  margin-right: ${({ mr }) => (mr ? mr : '0px')};
+  font-size: 16px;
+  line-height: 1.2;
   letter-spacing: 0.02em;
 
   border: none;
@@ -36,8 +38,8 @@ const Icon = styled.img`
   position: absolute;
   width: 24px;
   height: 24px;
+  top: -2px;
   left: 8px;
-  bottom: 8px;
 `;
 
 export const Input = ({ icon, ...otherProps }) => {

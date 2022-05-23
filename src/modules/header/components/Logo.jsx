@@ -21,9 +21,12 @@ const StyledLogo = styled.img`
 `;
 
 const Title = styled.h1`
-  display: none;
+  display: ${({ mobileHidden }) => (mobileHidden ? 'none' : 'block')};
   margin: 0;
   padding: 0;
+
+  &.mobileHidden {
+  }
 
   ${deviceScreen.M} {
     display: block;
@@ -38,12 +41,12 @@ const Title = styled.h1`
   }
 `;
 
-export const Logo = ({ title = 'MoviesBox' }) => {
+export const Logo = ({ title = 'MoviesBox', mobileHidden }) => {
   return (
     <Wrap fd="row" g="10px">
       <StyledLogo src={logo} />
       <StyledNavLink to="/main">
-        <Title>{title}</Title>
+        <Title mobileHidden={mobileHidden}>{title}</Title>
       </StyledNavLink>
     </Wrap>
   );

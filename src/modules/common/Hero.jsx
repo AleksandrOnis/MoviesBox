@@ -1,31 +1,56 @@
 import styled from 'styled-components';
-import defaultBgImage from 'images/window-login.jpg';
+import defaultImage from 'images/window-login.jpg';
+import { deviceScreen } from 'utils/stylesVars';
 
-const HeroWrap = styled.div`
-  width: 700px;
+const HeroTitle = styled.p`
+  margin-bottom: 10px;
+  font-size: 18px;
+  line-height: 1.2;
+  text-align: center;
+
+  ${deviceScreen.L} {
+    font-size: 24px;
+  }
 `;
-const HeroTitle = styled.h2``;
-const HeroText = styled.p``;
-// const HeroImage = styled.div`
-//   width: 100%;
-//   background: ${bg => `url(${bg}) center no-repeat`};
-//   background-size: cover;
-// `;
+const HeroText = styled.p`
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.2;
+  text-align: center;
+
+  ${deviceScreen.L} {
+    font-size: 18px;
+  }
+`;
+
+const WrapImage = styled.div`
+  overflow: hidden;
+`;
 
 const HeroImage = styled.img`
-  width: 500px;
+  border-radius: 50px;
+  transition: transform 1s;
+
+  :hover,
+  :focus {
+    transform: scale(1.4);
+  }
+
+  :blur {
+  }
 `;
 
 const defaultTitle = 'MoviesBox';
 const defaultText = 'it`s your window to the world of cinema';
 
-export const Hero = ({ bg = defaultBgImage, title = defaultTitle, text = defaultText }) => {
+export const Hero = ({ image = defaultImage, title = defaultTitle, text = defaultText }) => {
   return (
-    <HeroWrap>
+    <>
       <HeroTitle>{title}</HeroTitle>
       <HeroText>{text}</HeroText>
-      {/* <HeroImage></HeroImage> */}
-      <HeroImage src={defaultBgImage} />
-    </HeroWrap>
+      <WrapImage>
+        <HeroImage src={image} />
+      </WrapImage>
+    </>
   );
 };
