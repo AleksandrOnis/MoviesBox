@@ -11,19 +11,41 @@ const NavList = styled.ul`
 `;
 
 const StyledNav = styled(NavLink)`
+  position: relative;
+  padding: 10px;
   color: #fff;
   :not(:last-child) {
     margin-right: 40px;
   }
 
+  ::after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    bottom: 7px;
+    width: calc(100% - 20px);
+    height: 4px;
+    border-radius: 2px;
+    background-color: ${color.accent};
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 400ms, opacity 400ms;
+  }
+
   :hover,
   :focus {
-    border-bottom: 3px solid ${color.accent};
+    ::after {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
   &.active {
     color: #ff6b01;
-    border-bottom: none;
+
+    ::after {
+      opacity: 0;
+    }
   }
 `;
 

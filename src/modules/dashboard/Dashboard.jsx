@@ -1,6 +1,13 @@
+import styled from 'styled-components';
 import { useEffect, useContext } from 'react';
 import { SearchBar, Toggle } from './components';
 import { ThemeContext } from 'context';
+
+const StyledDashboard = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 export const Dashboard = ({ color }) => {
   const { theme, setTheme } = useContext(ThemeContext);
@@ -21,9 +28,9 @@ export const Dashboard = ({ color }) => {
   }, [theme]);
 
   return (
-    <>
+    <StyledDashboard>
       <SearchBar color={color} />
       <Toggle active={theme} onChange={() => setTheme(!theme)} />
-    </>
+    </StyledDashboard>
   );
 };
