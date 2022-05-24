@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Header } from 'modules/header/Header';
 import { Dashboard } from 'modules/dashboard/Dashboard';
-import { Wrap } from 'modules/common';
 import { Footer } from 'modules/footer/Footer';
 import { Main } from 'modules/common';
 
@@ -14,9 +13,7 @@ export const Library = () => {
   return (
     <>
       <Header>
-        <Wrap jc="space-between" ai="center">
-          <Dashboard />
-        </Wrap>
+        <Dashboard />
       </Header>
       <Main></Main>
       <Footer />
