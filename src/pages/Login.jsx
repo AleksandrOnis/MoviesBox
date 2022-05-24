@@ -2,12 +2,11 @@ import styled from 'styled-components';
 import { Button } from 'modules/common';
 import { Logo } from 'modules/header/components';
 import { Hero } from 'modules/common/Hero';
-import bgImage from 'images/window-login.jpg';
+import imageHero from 'images/window-login.jpg';
 import { LoginForm } from 'modules/login/LoginForm';
 import { color } from 'utils/stylesVars';
 import { deviceScreen } from 'utils/stylesVars';
 import { useNavigate } from 'react-router-dom';
-import { Main } from 'modules/common';
 
 const Container = styled.div`
   display: flex;
@@ -54,10 +53,9 @@ const FormWrap = styled.div`
 export const Login = () => {
   const navigate = useNavigate();
   return (
-    // <Main>
     <Container>
       <HeroWrap>
-        <Hero bg={bgImage} />
+        <Hero image={imageHero} />
       </HeroWrap>
       <FormWrap>
         <Logo />
@@ -67,6 +65,5 @@ export const Login = () => {
         </Button>
       </FormWrap>
     </Container>
-    // </Main>
   );
 };

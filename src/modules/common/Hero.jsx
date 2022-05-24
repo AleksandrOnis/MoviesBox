@@ -25,18 +25,15 @@ const HeroText = styled.p`
 
 const WrapImage = styled.div`
   overflow: hidden;
+  border-radius: 50px;
 `;
 
 const HeroImage = styled.img`
-  border-radius: 50px;
   transition: transform 1s;
 
   :hover,
   :focus {
     transform: scale(1.4);
-  }
-
-  :blur {
   }
 `;
 
