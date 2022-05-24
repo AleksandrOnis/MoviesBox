@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { color } from 'utils/stylesVars';
+import { deviceScreen } from 'utils/stylesVars';
 
 const NavList = styled.ul`
   padding: 0;
@@ -15,7 +16,11 @@ const StyledNav = styled(NavLink)`
   padding: 10px;
   color: #fff;
   :not(:last-child) {
-    margin-right: 40px;
+    margin-right: 10px;
+
+    ${deviceScreen.M} {
+      margin-right: 20px;
+    }
   }
 
   ::after {
