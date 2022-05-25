@@ -1,18 +1,20 @@
 import styled from 'styled-components';
 import { color } from 'utils/stylesVars';
 
-// .attrs(({ type }) => ({
-//   type: type || 'button',
-// }))`
-const StyledButton = styled.button`
+const StyledButton = styled.button.attrs(({ type }) => ({
+  type: type || 'button',
+}))`
   margin: ${({ m }) => (m ? m : '0')};
-  min-width: 120px;
+  min-width: ${({ w }) => (w ? w : '120px')};
   height: 40px;
 
+  padding: 10px;
+  font-size: 14px;
+  line-height: 1.2;
   text-transform: uppercase;
-
   color: #fff;
-  border: 1px solid ${color.accent};
+
+  border: 2px solid ${color.accent};
   border-radius: 20px;
   background-color: ${({ accent }) => (accent ? color.accent : 'transparent')};
 
@@ -21,7 +23,8 @@ const StyledButton = styled.button`
   :hover,
   :focus {
     transform: scale(1.05);
-    box-shadow: 4px 4px 5px rgba(37, 37, 37, 0.6);
+    box-shadow: ${({ accent }) =>
+      accent ? '5px 5px 8px rgba(0, 0, 0, 0.6)' : '4px 4px 5px rgba(255, 107, 1, 0.6)'};
   }
 `;
 

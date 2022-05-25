@@ -60,9 +60,7 @@ export const Registration = () => {
       <FormWrap>
         <Logo />
         <RegistrationForm />
-        <Button type="button" onClick={() => navigate('/login')}>
-          Login
-        </Button>
+        <Button onClick={() => navigate('/login')}>Login</Button>
       </FormWrap>
     </Container>
   );

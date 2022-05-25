@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { color } from 'utils/stylesVars';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { UserMenu } from './UserMenu';
+import { isLoggedIn } from 'redux/selectors';
+import { useSelector } from 'react-redux';
+import { Button } from 'modules/common';
 
 const StyledNavLink = styled(NavLink)`
   padding: 10px 20px 10px 20px;
@@ -17,5 +21,13 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 export const Authorization = () => {
-  return <StyledNavLink to="/login">Login</StyledNavLink>;
+  const navigate = useNavigate();
+  const isLogin = useSelector(isLoggedIn);
+  return isLogin ? (
+    <UserMenu />
+  ) : (
+    <Button w="80px" onClick={() => navigate('/login')}>
+      Login
+    </Button>
+  );
 };
