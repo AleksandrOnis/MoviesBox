@@ -8,12 +8,6 @@ const StyledToastContainer = styled(ToastContainer)`
     background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(5px);
   }
-  .Toastify__toast-icon svg {
-    fill: ${color.accent};
-  }
-  .Toastify__progress-bar {
-    background-color: ${color.accent};
-  }
 `;
 
 export const Notify = () => {

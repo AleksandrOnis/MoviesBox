@@ -42,10 +42,16 @@ const Icon = styled.img`
   left: 8px;
 `;
 
-export const Input = ({ icon, ...otherProps }) => {
+export const Input = ({ icon, setValue, onChange, ...otherProps }) => {
+  const handleChange = e => {
+    const { value } = e.target;
+
+    setValue(value);
+  };
+
   return (
     <InputWrap>
-      <StyledInput {...otherProps} />
+      <StyledInput onChange={onChange ? onChange : handleChange} {...otherProps} />
       {icon && <Icon src={icon} />}
     </InputWrap>
   );

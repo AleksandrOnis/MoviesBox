@@ -4,6 +4,9 @@ import { useState } from 'react';
 import mail from 'images/authorization/mail.svg';
 import lock from 'images/authorization/lock.svg';
 import human from 'images/authorization/human.svg';
+import { registerUser } from 'api/auth';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Form = styled.form`
   text-align: center;
@@ -13,25 +16,39 @@ export const RegistrationForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = event => {};
+  const handleSubmit = async event => {
+    event.preventDefault();
+    const body = { name, email, password };
+    // console.table(body);
+    try {
+      const result = await registerUser(body);
+      toast.success('You are successfully registered');
+      navigate('/login');
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   return (
     <Form onSubmit={handleSubmit}>
       <Input
-        name={name}
+        name="name"
         placeholder={'Name'}
         type="text"
-        onChange={setName}
+        value={name}
+        setValue={setName}
         icon={human}
         mb="30px"
         required
       />
       <Input
-        name={email}
+        name="email"
         placeholder={'E-mail'}
         type="email"
-        onChange={setEmail}
+        value={email}
+        setValue={setEmail}
         icon={mail}
         mb="30px"
         required
@@ -40,12 +57,13 @@ export const RegistrationForm = () => {
         name="password"
         placeholder={'Password'}
         type="password"
-        onChange={setPassword}
+        value={password}
+        setValue={setPassword}
         icon={lock}
         mb="30px"
         required
       />
-      <Button type="submit" accent disabled={!email || !password}>
+      <Button type="submit" accent disabled={!name || !email || !password}>
         Registration
       </Button>
     </Form>
