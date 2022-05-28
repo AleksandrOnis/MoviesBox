@@ -5,6 +5,7 @@ import ReactPlayer from 'react-player';
 import { Button, Modal } from '.';
 import { useModal } from 'hooks/useModal';
 import { useGetTrailerByIdQuery } from 'api/movies';
+import { getOfficialTrailer } from 'utils/getOfficialTrailer';
 
 const Container = styled.div`
   width: 280px;
@@ -99,40 +100,53 @@ export const DescriptionMovie = ({ movie = {} }) => {
   const { isModal, openModal, closeModal } = useModal();
 
   const { data: trailers } = useGetTrailerByIdQuery(id);
-  console.log(trailers);
+
+  let trailer = null;
+  if (trailers) {
+    trailer = getOfficialTrailer(trailers); ///////////////////////MEMO
+  }
+
+  const handleButtonClick = () => {
+    openModal();
+  };
 
   return (
-    <Container>
-      <WrapPoster>
-        {poster_path ? (
-          <Poster
-            src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-            alt={`No poster for movie ${title}`}
-          />
-        ) : (
-          <Poster src={noPoster} alt={`No poster for movie ${title}`} />
-        )}
-      </WrapPoster>
-      <WrapContent>
-        <Title>{title}</Title>
-        <Info></Info>
-        <About>About </About>
-        <Description>{overview}</Description>
-        <Button w="140px" accent onClick={openModal}>
-          Watch trailer
-        </Button>
-        {isModal && (
-          <Modal closeModal={closeModal}>
+    <>
+      <Container>
+        <WrapPoster>
+          {poster_path ? (
+            <Poster
+              src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+              alt={`No poster for movie ${title}`}
+            />
+          ) : (
+            <Poster src={noPoster} alt={`No poster for movie ${title}`} />
+          )}
+        </WrapPoster>
+        <WrapContent>
+          <Title>{title}</Title>
+          <Info></Info>
+          <About>About </About>
+          <Description>{overview}</Description>
+          <Button w="140px" accent onClick={handleButtonClick}>
+            Watch trailer
+          </Button>
+        </WrapContent>
+      </Container>
+
+      {isModal && (
+        <Modal closeModal={closeModal} offListener>
+          {trailer && (
             <TrailerWrap>
               <ReactPlayer
                 width="100%"
                 controls
-                url={`https://www.youtube.com/watch?v=${trailers[0].key}`}
+                url={`https://www.youtube.com/watch?v=${trailer.key}`}
               />
             </TrailerWrap>
-          </Modal>
-        )}
-      </WrapContent>
-    </Container>
+          )}
+        </Modal>
+      )}
+    </>
   );
 };
