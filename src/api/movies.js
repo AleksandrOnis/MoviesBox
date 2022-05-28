@@ -1,38 +1,44 @@
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-axios.defaults.baseURL = 'https://api.themoviedb.org/3';
-axios.defaults.headers.common['Authorization'] =
-  'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1OTBhNmYzNzYyMWZmNjU1NDgyNDBkYTE0NDg2ZjZiOCIsInN1YiI6IjYxOWExOGU4YmU3ZjM1MDA5MDdkNTNjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GfmtDhNir5MZJCHi4q2ycSDwats7A4Rz127QE9GN30w';
+const GUEST_TOKEN = process.env.REACT_APP_GUEST_TOKEN;
 
-const handleFetch = async function (request) {
-  // loading is start
-  try {
-    const response = await axios.get(request);
-    return response.data;
-  } catch (error) {
-    toast.error(error.message);
-  } finally {
-    // loading is finished
-  }
-};
+const baseQuery = fetchBaseQuery({
+  baseUrl: 'https://api.themoviedb.org/3',
+  prepareHeaders: headers => {
+    headers.set('authorization', `Bearer ${GUEST_TOKEN}`);
+    return headers;
+  },
+});
 
-export const getTrendingMovies = function (page = 1) {
-  return handleFetch(`/trending/movie/week?page=${page}`);
-};
+export const moviesApi = createApi({
+  reducerPath: ['moviesApi'],
+  baseQuery,
+  endpoints: builder => ({
+    getMovieById: builder.query({
+      query: id => `/movie/${id}`,
+    }),
+    getMoviesByRequest: builder.query({
+      query: (query = '', page = 1) =>
+        `/search/movie?include_adult=false&query=${query}&page=${page}`,
+    }),
+    getTrendingMovies: builder.query({
+      query: (page = 1) => `/trending/movie/week?page=${page}`,
+      transformResponse: response => response.results,
+    }),
+    getTrailerById: builder.query({
+      query: id => `/movie/${id}/videos`,
+    }),
+    getGenresList: builder.query({
+      query: () => `/genre/movie/list?official`,
+      transformResponse: response => response.genres,
+    }),
+  }),
+});
 
-export const getMoviesByQuery = function (query = '', page = 1) {
-  return handleFetch(`/search/movie?include_adult=false&query=${query}&page=${page}`);
-};
-
-export const getMovieById = function (id) {
-  return handleFetch(`/movie/${id}`);
-};
-
-export const getTrailerById = function (id) {
-  return handleFetch(`/movie/${id}/videos`);
-};
-
-export const getGenresList = function () {
-  return handleFetch(`/genre/movie/list?official`);
-};
+export const {
+  useGetTrendingMoviesQuery,
+  useGetMoviesByRequestQuery,
+  useGetTrailerByIdQuery,
+  useGetMovieByIdQuery,
+  useGetGenresListQuery,
+} = moviesApi;

@@ -1,9 +1,7 @@
 import styled from 'styled-components';
-import { color, deviceScreen } from 'utils/stylesVars';
+import { deviceScreen } from 'utils/stylesVars';
 import noPoster from 'images/film.jpg';
-import { moviesAPI } from 'api';
 import ReactPlayer from 'react-player';
-import { toast } from 'react-toastify';
 
 const Container = styled.div`
   width: 280px;
