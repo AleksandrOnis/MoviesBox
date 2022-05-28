@@ -17,7 +17,7 @@ export const moviesApi = createApi({
     getMovieById: builder.query({
       query: id => `/movie/${id}`,
     }),
-    getMoviesByRequest: builder.query({
+    getMoviesBySearch: builder.query({
       query: (query = '', page = 1) =>
         `/search/movie?include_adult=false&query=${query}&page=${page}`,
     }),
@@ -27,6 +27,7 @@ export const moviesApi = createApi({
     }),
     getTrailerById: builder.query({
       query: id => `/movie/${id}/videos`,
+      transformResponse: response => response.results,
     }),
     getGenresList: builder.query({
       query: () => `/genre/movie/list?official`,
@@ -37,7 +38,7 @@ export const moviesApi = createApi({
 
 export const {
   useGetTrendingMoviesQuery,
-  useGetMoviesByRequestQuery,
+  useGetMoviesBySearchQuery,
   useGetTrailerByIdQuery,
   useGetMovieByIdQuery,
   useGetGenresListQuery,

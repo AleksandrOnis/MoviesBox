@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import { deviceScreen } from 'utils/stylesVars';
 import noPoster from 'images/film.jpg';
 import ReactPlayer from 'react-player';
+import { Button, Modal } from '.';
+import { useModal } from 'hooks/useModal';
+import { useGetTrailerByIdQuery } from 'api/movies';
 
 const Container = styled.div`
   width: 280px;
@@ -39,10 +42,6 @@ const WrapContent = styled.div`
 `;
 
 const WrapPoster = styled.div`
-  background-color: rgb(165, 165, 165);
-  background-image: url(${noPoster});
-  background-size: cover;
-  background-repeat: no-repeat;
   overflow: hidden;
   width: 240px;
   border-radius: 5px;
@@ -86,7 +85,7 @@ const About = styled.p`
 `;
 
 const TrailerWrap = styled.div`
-  width: 100%;
+  width: 600px;
 `;
 
 const Description = styled.div`
@@ -94,34 +93,45 @@ const Description = styled.div`
   line-height: 1.7;
 `;
 
-export const DescriptionMovie = ({ movie = {}, trailer }) => {
-  const {
-    title = '',
-    genres = '',
-    release_date = 'xxxx',
-    vote_average = 'x.x',
-    poster_path = '',
-    overview = '',
-    id = '',
-  } = movie;
-  let video = null;
+export const DescriptionMovie = ({ movie = {} }) => {
+  const { title, genres, release_date, vote_average = 'x.x', poster_path, overview, id } = movie;
+
+  const { isModal, openModal, closeModal } = useModal();
+
+  const { data: trailers } = useGetTrailerByIdQuery(id);
+  console.log(trailers);
 
   return (
     <Container>
       <WrapPoster>
-        <Poster
-          src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-          alt={`No poster for movie ${title}`}
-        />
+        {poster_path ? (
+          <Poster
+            src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+            alt={`No poster for movie ${title}`}
+          />
+        ) : (
+          <Poster src={noPoster} alt={`No poster for movie ${title}`} />
+        )}
       </WrapPoster>
       <WrapContent>
         <Title>{title}</Title>
         <Info></Info>
         <About>About </About>
         <Description>{overview}</Description>
-        <TrailerWrap>
-          <ReactPlayer width="100%" controls url={`https://www.youtube.com/watch?v=${trailer}`} />
-        </TrailerWrap>
+        <Button w="140px" accent onClick={openModal}>
+          Watch trailer
+        </Button>
+        {isModal && (
+          <Modal closeModal={closeModal}>
+            <TrailerWrap>
+              <ReactPlayer
+                width="100%"
+                controls
+                url={`https://www.youtube.com/watch?v=${trailers[0].key}`}
+              />
+            </TrailerWrap>
+          </Modal>
+        )}
       </WrapContent>
     </Container>
   );

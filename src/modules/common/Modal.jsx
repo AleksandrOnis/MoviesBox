@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import close from 'images/icons/close.svg';
+import { createPortal } from 'react-dom';
 
 const Backdrop = styled.div`
-  display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
+  display: flex;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -43,9 +44,11 @@ const CloseButton = styled.button`
 
 const CloseIcon = styled.img``;
 
-export const Modal = ({ children, isOpen, setIsOpen, w, h, mb = 40, jc, ai, fd }) => {
+export const Modal = ({ children, closeModal, offListener, w, h, mb = 40, jc, ai, fd }) => {
   useEffect(() => {
+    if (offListener) return;
     const close = e => {
+      e.stopPropagation();
       if (e.keyCode === 27) {
         handleClose();
       }
@@ -58,17 +61,23 @@ export const Modal = ({ children, isOpen, setIsOpen, w, h, mb = 40, jc, ai, fd }
   }, []);
 
   const handleClose = () => {
-    setIsOpen(false);
+    closeModal();
+    console.log('close');
   };
 
-  return (
-    <Backdrop onClick={handleClose} isOpen={isOpen}>
-      <ModalWrap onClick={e => e.stopPropagation()} w={w} h={h} jc={jc} ai={ai} fd={fd}>
+  const handleClick = e => {
+    e.stopPropagation();
+  };
+
+  return createPortal(
+    <Backdrop onClick={handleClose}>
+      <ModalWrap onClick={handleClick} w={w} h={h} jc={jc} ai={ai} fd={fd}>
         <CloseButton onClick={handleClose}>
           <CloseIcon src={close} />
         </CloseButton>
         {children}
       </ModalWrap>
-    </Backdrop>
+    </Backdrop>,
+    document.body,
   );
 };
