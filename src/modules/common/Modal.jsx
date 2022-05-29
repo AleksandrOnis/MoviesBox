@@ -54,8 +54,10 @@ export const Modal = ({ children, closeModal, offListener, w, h, mb = 40, jc, ai
       }
     };
     window.addEventListener('keydown', close);
+    document.body.style.overflow = 'hidden';
     return () => {
       window.removeEventListener('keydown', close);
+      document.body.style.overflow = 'unset';
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
