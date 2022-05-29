@@ -1,4 +1,4 @@
 import { SearchBar } from './SearchBar';
-import { Toggle } from './Toggle';
+import { ToggleTheme } from './ToggleTheme';
 
-export { SearchBar, Toggle };
+export { SearchBar, ToggleTheme };

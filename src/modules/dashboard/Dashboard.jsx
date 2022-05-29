@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useContext } from 'react';
-import { SearchBar, Toggle } from './components';
+import { SearchBar, ToggleTheme } from './components';
 import { ThemeContext } from 'context';
 
 const StyledDashboard = styled.div`
@@ -30,7 +30,7 @@ export const Dashboard = ({ color }) => {
   return (
     <StyledDashboard>
       <SearchBar color={color} />
-      <Toggle active={theme} onChange={() => setTheme(!theme)} />
+      <ToggleTheme active={theme} onChange={() => setTheme(!theme)} />
     </StyledDashboard>
   );
 };

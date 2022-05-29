@@ -25,18 +25,22 @@ const Text = styled.p`
   }
 `;
 
+const Name = styled.span`
+  white-space: nowrap;
+`;
+
 export const Footer = () => {
   return (
     <StyledFooter>
       <Wrap jc="center">
         <Text>
-          <AccentWrap>&copy;</AccentWrap> 2021
+          <AccentWrap>&copy;</AccentWrap> 2022
         </Text>
         <Text>All Rights Reserved</Text>
         <Text>
           Developed
           <AccentWrap> by </AccentWrap>
-          Oleksandr Onyshchenko
+          <Name>Oleksandr Onyshchenko</Name>
         </Text>
       </Wrap>
     </StyledFooter>

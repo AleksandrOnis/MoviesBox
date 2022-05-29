@@ -58,11 +58,7 @@ const WrapPoster = styled.div`
     margin-right: 30px;
   }
 `;
-const Poster = styled.img`
-  object-fit: contain;
-  width: 100%;
-  border-radius: 5px;
-`;
+const Poster = styled.img``;
 const Title = styled.p`
   margin-bottom: 20px;
   font-weight: 500;
@@ -91,6 +87,7 @@ const TrailerWrap = styled.div`
 
 const Description = styled.div`
   margin-bottom: 10px;
+  font-size: 14px;
   line-height: 1.7;
 `;
 

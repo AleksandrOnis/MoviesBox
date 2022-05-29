@@ -6,7 +6,7 @@ const InputWrap = styled.div`
 `;
 
 const StyledInput = styled.input`
-  padding: 5px 5px 5px 40px;
+  padding: ${({ icon }) => (icon ? '5px 5px 5px 40px' : '5px')};
   width: 280px;
   margin-bottom: ${({ mb }) => (mb ? mb : '0px')};
   margin-right: ${({ mr }) => (mr ? mr : '0px')};
@@ -45,13 +45,12 @@ const Icon = styled.img`
 export const Input = ({ icon, setValue, onChange, ...otherProps }) => {
   const handleChange = e => {
     const { value } = e.target;
-
     setValue(value);
   };
 
   return (
     <InputWrap>
-      <StyledInput onChange={onChange ? onChange : handleChange} {...otherProps} />
+      <StyledInput icon={icon} onChange={onChange ? onChange : handleChange} {...otherProps} />
       {icon && <Icon src={icon} />}
     </InputWrap>
   );
