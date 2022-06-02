@@ -3,6 +3,8 @@ import { BiSearchAlt2 } from 'react-icons/bi';
 import { color } from 'utils/stylesVars';
 import { Input } from 'modules/common';
 import { deviceScreen } from 'utils/stylesVars';
+import { toast } from 'react-toastify';
+import { useState } from 'react';
 
 const Form = styled.form`
   display: flex;
@@ -28,21 +30,30 @@ const SearchIcon = styled(BiSearchAlt2)`
   height: 24px;
 `;
 
-const handleSubmit = event => {
-  event.preventDefault();
+export const SearchBar = ({ getSearchQuery: sendSearchQuery }) => {
+  const [searchQuery, setSearchQuery] = useState('');
 
-  // if (searchQuery.trim() === '') {
-  //   Notify.warning('Please enter movie name and try again');
-  //   return;
-  // }
+  const handleSubmit = event => {
+    event.preventDefault();
+    if (searchQuery.trim() === '') {
+      toast.warning('Please enter movie name and try again');
+      setSearchQuery('');
+      return;
+    }
+    sendSearchQuery(searchQuery);
+    setSearchQuery('');
+  };
 
-  // RenderResults();
-};
-
-export const SearchBar = () => {
   return (
     <Form autoComplete="off" onSubmit={handleSubmit}>
-      <StyledInput type="text" name="searchQuery" placeholder="Search movies..." required />
+      <StyledInput
+        type="text"
+        name="searchQuery"
+        placeholder="Search movies..."
+        value={searchQuery}
+        setValue={setSearchQuery}
+        required
+      />
       <Button type="submit">
         <SearchIcon color={color.accent} />
       </Button>

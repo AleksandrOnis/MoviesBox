@@ -20,6 +20,7 @@ export const moviesApi = createApi({
     getMoviesBySearch: builder.query({
       query: (query = '', page = 1) =>
         `/search/movie?include_adult=false&query=${query}&page=${page}`,
+      transformResponse: response => response.results,
     }),
     getTrendingMovies: builder.query({
       query: (page = 1) => `/trending/movie/week?page=${page}`,

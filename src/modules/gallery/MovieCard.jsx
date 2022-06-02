@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import noPoster from 'images/no-poster.jpg';
 import { cubicBezier } from 'utils/stylesVars';
 import { getGenresMovie, titlesGenres } from 'utils/genres';
-import { useModal } from 'hooks/useModal';
+import { useModal } from 'hooks';
 import { DescriptionMovie, Modal } from 'modules/common';
 import { moviesApi } from 'api/movies';
 

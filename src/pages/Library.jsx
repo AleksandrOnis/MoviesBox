@@ -3,7 +3,7 @@ import { Header } from 'modules/header/Header';
 import { Dashboard } from 'modules/dashboard/Dashboard';
 import { Footer } from 'modules/footer/Footer';
 import { Main } from 'modules/common';
-import { useLogOutRedirect } from 'hooks/useLogOutRedirect';
+import { useLogOutRedirect } from 'hooks';
 
 export const Library = () => {
   useLogOutRedirect();

@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import { Container, Spinner } from 'modules/common';
 import { MovieCard } from './MovieCard';
 import { deviceScreen } from 'utils/stylesVars';
-import { useGetTrendingMoviesQuery } from 'api/movies';
 
 const SectionGallery = styled.section``;
 const MoviesList = styled.ul`
@@ -22,11 +21,7 @@ const MoviesList = styled.ul`
   }
 `;
 
-export const Gallery = () => {
-  const { data: movies, isError, isLoading } = useGetTrendingMoviesQuery();
-
-  // (!isError && !isLoading) =>render // toast.error('Sorry, server not resonding');
-
+export const Gallery = ({ movies }) => {
   return (
     <SectionGallery>
       <Container>

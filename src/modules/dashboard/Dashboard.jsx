@@ -9,7 +9,7 @@ const StyledDashboard = styled.div`
   align-items: center;
 `;
 
-export const Dashboard = ({ color }) => {
+export const Dashboard = ({ getSearchQuery }) => {
   const { theme, setTheme } = useContext(ThemeContext);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export const Dashboard = ({ color }) => {
 
   return (
     <StyledDashboard>
-      <SearchBar color={color} />
+      <SearchBar getSearchQuery={getSearchQuery} />
       <ToggleTheme active={theme} onChange={() => setTheme(!theme)} />
     </StyledDashboard>
   );
