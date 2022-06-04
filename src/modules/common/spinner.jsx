@@ -1,6 +1,23 @@
 import styled, { keyframes } from 'styled-components';
 import { color } from 'utils/stylesVars';
 
+export const Spinner = () => {
+  return (
+    <Container>
+      <Wave></Wave>
+      <Wave></Wave>
+      <Wave></Wave>
+      <Wave></Wave>
+      <Wave></Wave>
+      <Wave></Wave>
+      <Wave></Wave>
+      <Wave></Wave>
+      <Wave></Wave>
+      <Wave></Wave>
+    </Container>
+  );
+};
+
 const waveAnimation = keyframes`
      0% {
        transform: scale(0);
@@ -65,20 +82,3 @@ const Wave = styled.div`
     animation-delay: 0.4s;
   }
 `;
-
-export const Spinner = () => {
-  return (
-    <Container>
-      <Wave></Wave>
-      <Wave></Wave>
-      <Wave></Wave>
-      <Wave></Wave>
-      <Wave></Wave>
-      <Wave></Wave>
-      <Wave></Wave>
-      <Wave></Wave>
-      <Wave></Wave>
-      <Wave></Wave>
-    </Container>
-  );
-};
