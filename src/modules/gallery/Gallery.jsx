@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import { Container, Spinner } from 'modules/common';
-import { MovieCard } from './MovieCard';
+import { MovieCard } from './components/MovieCard';
 import { deviceScreen } from 'utils/stylesVars';
 
 const SectionGallery = styled.section``;
