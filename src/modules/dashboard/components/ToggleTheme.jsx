@@ -1,6 +1,31 @@
 import styled from 'styled-components';
 import { WiDaySunny, WiMoonWaningCrescent4 } from 'react-icons/wi';
 import { color } from 'utils/stylesVars';
+import { useDispatch, useSelector } from 'react-redux';
+import { switchTheme } from 'redux/theme/themeSlice';
+import { modeTheme } from 'redux/selectors';
+
+export const ToggleTheme = ({ onChange }) => {
+  const theme = useSelector(modeTheme);
+  const dispatch = useDispatch();
+  return (
+    <ToggleWrap>
+      <StyledToggle>
+        <input
+          id="toggleTheme"
+          type="checkbox"
+          checked={theme === 'light' ? true : false}
+          onChange={e => {
+            dispatch(switchTheme());
+          }}
+        />
+        <span></span>
+        <IconSun />
+        <IconMoon />
+      </StyledToggle>
+    </ToggleWrap>
+  );
+};
 
 const IconSun = styled(WiDaySunny)`
   position: absolute;
@@ -27,7 +52,6 @@ const ToggleWrap = styled.div`
   justify-content: center;
   align-items: baseline;
   border-radius: 20px;
-  cursor: pointer;
 
   :hover,
   :focus {
@@ -43,7 +67,7 @@ const StyledToggle = styled.label`
   height: 40px;
   border: 2px solid ${color.accent};
   border-radius: 20px;
-  pointer-events: none;
+  cursor: pointer;
 
   input {
     display: none;
@@ -66,22 +90,3 @@ const StyledToggle = styled.label`
     background-color: ${color.accent};
   }
 `;
-
-export const ToggleTheme = ({ onChange }) => {
-  return (
-    <ToggleWrap onClick={() => document.getElementById('toggleTheme').click()}>
-      <StyledToggle>
-        <input
-          id="toggleTheme"
-          type="checkbox"
-          onChange={e => {
-            onChange();
-          }}
-        />
-        <span />
-        <IconSun />
-        <IconMoon />
-      </StyledToggle>
-    </ToggleWrap>
-  );
-};

@@ -2,10 +2,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Notify } from 'modules/common/Notify';
 import { GlobalStyle, Spinner } from 'modules/common';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { ThemeContext } from 'context';
-import { lazy, Suspense, useState } from 'react';
 import { darkTheme, lightTheme } from 'utils/theme';
+import { useSelector } from 'react-redux';
+import { modeTheme } from 'redux/selectors';
 
 const HomePage = lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
 const LibraryPage = lazy(() =>
@@ -17,23 +18,21 @@ const Registration = lazy(() =>
 );
 
 function App() {
-  const [theme, setTheme] = useState(true);
+  const theme = useSelector(modeTheme);
 
   return (
-    <ThemeProvider theme={theme ? darkTheme : lightTheme}>
-      <ThemeContext.Provider value={{ theme, setTheme }}>
-        <GlobalStyle />
-        <Suspense fallback={<Spinner />}>
-          <Routes>
-            <Route path="home" element={<HomePage />} />
-            <Route path="library" element={<LibraryPage />} />
-            <Route path="login" element={<Login />} />
-            <Route path="registration" element={<Registration />} />
-            <Route path="*" element={<Navigate to="/home" />} />
-          </Routes>
-        </Suspense>
-        <Notify />
-      </ThemeContext.Provider>
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <GlobalStyle />
+      <Suspense fallback={<Spinner />}>
+        <Routes>
+          <Route path="home" element={<HomePage />} />
+          <Route path="library" element={<LibraryPage />} />
+          <Route path="login" element={<Login />} />
+          <Route path="registration" element={<Registration />} />
+          <Route path="*" element={<Navigate to="/home" />} />
+        </Routes>
+      </Suspense>
+      <Notify />
     </ThemeProvider>
   );
 }

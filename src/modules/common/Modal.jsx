@@ -69,8 +69,8 @@ const ModalWrap = styled.div`
   padding: 65px 20px;
 
   border-radius: 20px;
-  color: ${({ theme }) => theme.textColor};
-  background: ${({ theme }) => theme.body};
+  color: ${({ theme }) => theme.TEXT_COLOR};
+  background: ${({ theme }) => theme.BACKGROUND_COLOR};
   overflow: hidden;
 
   ${deviceScreen.M} {
