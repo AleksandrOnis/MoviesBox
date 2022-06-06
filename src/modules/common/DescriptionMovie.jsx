@@ -42,9 +42,11 @@ export const DescriptionMovie = ({ movie = {} }) => {
           <Info></Info>
           <About>About </About>
           <Description>{overview}</Description>
-          <Button w="140px" accent onClick={handleButtonClick}>
-            Watch trailer
-          </Button>
+          <WrapButton>
+            <Button w="140px" accent onClick={handleButtonClick}>
+              Watch trailer
+            </Button>
+          </WrapButton>
         </WrapContent>
       </Container>
 
@@ -128,6 +130,13 @@ const Description = styled.div`
   margin-bottom: 20px;
   font-size: 14px;
   line-height: 1.7;
+`;
+
+const WrapButton = styled.div`
+  ${deviceScreen.S} {
+    text-align: center;
+    padding-bottom: 15px;
+  }
 `;
 
 const TrailerWrap = styled.div`
