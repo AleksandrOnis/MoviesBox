@@ -6,11 +6,19 @@ import { Button, Modal } from '.';
 import { useModal } from 'hooks/useModal';
 import { useGetTrailerByIdQuery } from 'api/movies';
 import { getOfficialTrailer } from 'utils/getOfficialTrailer';
+import { useAddMovieMutation } from 'api/moviesBox';
 
 export const DescriptionMovie = ({ movie = {} }) => {
-  const { title, genres, release_date, vote_average = 'x.x', poster_path, overview, id } = movie;
-  console.log(movie);
-
+  const [addMovie] = useAddMovieMutation();
+  const {
+    title,
+    genres_Ids,
+    release_date,
+    vote_average = 'x.x',
+    poster_path,
+    overview,
+    id,
+  } = movie;
   const { isModal, openModal, closeModal } = useModal();
 
   const { data: trailers } = useGetTrailerByIdQuery(id);
@@ -20,8 +28,18 @@ export const DescriptionMovie = ({ movie = {} }) => {
     trailer = getOfficialTrailer(trailers); ///////////////////////MEMO
   }
 
-  const handleButtonClick = () => {
+  const handleOpenModal = () => {
     openModal();
+  };
+
+  const handleAddLibrary = async () => {
+    try {
+      const data = { title, overview, movieId: id, poster_path, release_date, genres_Ids };
+      console.log('add', data);
+      await addMovie(data);
+    } catch (error) {
+      console.log('handleAddLibraryERROR', error);
+    }
   };
 
   return (
@@ -43,8 +61,11 @@ export const DescriptionMovie = ({ movie = {} }) => {
           <About>About </About>
           <Description>{overview}</Description>
           <WrapButton>
-            <Button w="140px" accent onClick={handleButtonClick}>
+            <Button w="140px" accent onClick={handleOpenModal}>
               Watch trailer
+            </Button>
+            <Button w="140px" accent onClick={handleAddLibrary}>
+              Add to library
             </Button>
           </WrapButton>
         </WrapContent>
@@ -133,10 +154,10 @@ const Description = styled.div`
 `;
 
 const WrapButton = styled.div`
-  ${deviceScreen.S} {
-    text-align: center;
-    padding-bottom: 15px;
-  }
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 15px;
+  padding-right: 15px;
 `;
 
 const TrailerWrap = styled.div`
