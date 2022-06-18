@@ -1,24 +1,26 @@
-import axios from 'axios';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-axios.defaults.baseURL = 'https://proj-node-films.herokuapp.com/api';
-// axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+export const authApi = createApi({
+  reducerPath: ['authApi'],
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://moviesbox-api.herokuapp.com/api',
+  }),
+  endpoints: builder => ({
+    registerUser: builder.mutation({
+      query: body => ({
+        url: '/auth/signup',
+        method: 'POST',
+        body,
+      }),
+    }),
+    loginUser: builder.mutation({
+      query: body => ({
+        url: '/auth/signin',
+        method: 'POST',
+        body,
+      }),
+    }),
+  }),
+});
 
-export const registerUser = async function (body) {
-  try {
-    const response = await axios.post(`/auth/signup`, body);
-    return response.data;
-  } catch (error) {
-    throw new Error(error);
-  } finally {
-  }
-};
-
-export const loginUser = async function (body) {
-  try {
-    const response = await axios.post(`/auth/signin`, body);
-    return response.data;
-  } catch (error) {
-    throw new Error(error);
-  } finally {
-  }
-};
+export const { useRegisterUserMutation, useLoginUserMutation } = authApi;

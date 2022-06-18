@@ -3,7 +3,7 @@ import { Input, Button } from 'modules/common';
 import { useState } from 'react';
 import mail from 'images/authorization/mail.svg';
 import lock from 'images/authorization/lock.svg';
-import { loginUser } from 'api/auth';
+import { useLoginUserMutation } from 'api/auth';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
@@ -14,6 +14,7 @@ const Form = styled.form`
 `;
 
 export const LoginForm = () => {
+  const [loginUser] = useLoginUserMutation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -22,10 +23,9 @@ export const LoginForm = () => {
   const handleSubmit = async event => {
     event.preventDefault();
     const body = { email, password };
-    console.table(body);
     try {
       const response = await loginUser(body);
-      console.log(response);
+      console.log('loginUser', response);
       dispatch(logIn(response));
       navigate('/library');
     } catch (error) {

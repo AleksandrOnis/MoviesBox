@@ -4,7 +4,7 @@ import { useState } from 'react';
 import mail from 'images/authorization/mail.svg';
 import lock from 'images/authorization/lock.svg';
 import human from 'images/authorization/human.svg';
-import { registerUser } from 'api/auth';
+import { useRegisterUserMutation } from 'api/auth';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,6 +13,7 @@ const Form = styled.form`
 `;
 
 export const RegistrationForm = () => {
+  const [registerUser] = useRegisterUserMutation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,9 +22,8 @@ export const RegistrationForm = () => {
   const handleSubmit = async event => {
     event.preventDefault();
     const body = { name, email, password };
-    // console.table(body);
     try {
-      const result = await registerUser(body);
+      await registerUser(body);
       toast.success('You are successfully registered');
       navigate('/login');
     } catch (error) {
