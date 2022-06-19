@@ -11,22 +11,30 @@ import { useEffect, useState } from 'react';
 // (!isError && !isLoading) =>render // toast.error('Sorry, server not resonding');
 
 export const Home = () => {
+  const [page, setPage] = useState(1);
+  const [pageCount, setPageCount] = useState(0);
   const [searchQuery, setSearchQuery] = useState();
   const [movies, setMovies] = useState(null);
   const { data: moviesByQuery } = useGetMoviesBySearchQuery(searchQuery);
-  const { data: trendingMovies, isError, isLoading } = useGetTrendingMoviesQuery();
+  const { data: trendingMovies, isError, isLoading } = useGetTrendingMoviesQuery(page);
   const getSearchQuery = value => {
     setSearchQuery(value);
     console.log(searchQuery);
   };
 
+  const getPage = newPage => setPage(newPage);
   useEffect(() => {
-    setMovies(trendingMovies);
+    setMovies(trendingMovies?.results);
+    setPageCount(trendingMovies?.total_pages);
   }, [trendingMovies]);
 
   useEffect(() => {
     searchQuery && setMovies(moviesByQuery);
   }, [moviesByQuery]);
+
+  useEffect(() => {
+    console.log('new page - ', page);
+  }, [page]);
 
   return (
     <>
@@ -35,7 +43,7 @@ export const Home = () => {
       </Header>
       <Main id="main">
         {/* {isLoading ? <Loader /> : <Gallery movies={movies} />} */}
-        {movies && <Gallery movies={movies} />}
+        {movies && <Gallery movies={movies} getPage={getPage} pageCount={pageCount} />}
       </Main>
       <Footer />
     </>

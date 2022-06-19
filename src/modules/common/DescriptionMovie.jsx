@@ -6,10 +6,11 @@ import { Button, Modal } from '.';
 import { useModal } from 'hooks/useModal';
 import { useGetTrailerByIdQuery } from 'api/movies';
 import { getOfficialTrailer } from 'utils/getOfficialTrailer';
-import { useAddMovieMutation } from 'api/moviesBox';
+import { useAddMovieMutation, useDeleteMovieMutation } from 'api/moviesBox';
 
 export const DescriptionMovie = ({ movie = {} }) => {
   const [addMovie] = useAddMovieMutation();
+  const [deleteMovie] = useDeleteMovieMutation();
   const {
     title,
     genres_Ids,
@@ -42,6 +43,15 @@ export const DescriptionMovie = ({ movie = {} }) => {
     }
   };
 
+  const handleDelLibrary = async () => {
+    try {
+      console.log('idddddddddddddd', id);
+      await deleteMovie(id);
+    } catch (error) {
+      console.log('handleDelLibraryERROR', error);
+    }
+  };
+
   return (
     <>
       <Container>
@@ -68,6 +78,9 @@ export const DescriptionMovie = ({ movie = {} }) => {
               Add to library
             </Button>
           </WrapButton>
+          <Button w="140px" accent onClick={handleDelLibrary}>
+            Del from library
+          </Button>
         </WrapContent>
       </Container>
 

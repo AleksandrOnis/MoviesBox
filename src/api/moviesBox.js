@@ -2,7 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { rootState } from 'redux/store';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://moviesbox-api.herokuapp.com/api/movies',
+  baseUrl: 'http://localhost:3001/api',
+  baseUrl: 'https://moviesbox-api.herokuapp.com/api',
   prepareHeaders: headers => {
     const TOKEN = rootState().user.token;
     console.log(TOKEN);
@@ -17,28 +18,28 @@ export const moviesBoxApi = createApi({
   tagTypes: ['Movies'],
   endpoints: builder => ({
     getMovies: builder.query({
-      query: (page = 1) => `/?page=${page}`,
-      transformResponse: response => response.results,
+      query: (page = 1) => `/movies?page=${page}`,
+      transformResponse: response => response,
       providesTags: ['Movies'],
     }),
 
     addMovie: builder.mutation({
-      query: ({ id, ...othersProps }) => ({
-        url: `/add`,
+      query: ({ id, ...body }) => ({
+        url: `/movies/add`,
         method: 'POST',
-        body: othersProps,
+        body,
         invalidatesTags: ['Movies'],
       }),
     }),
     deleteMovie: builder.mutation({
       query: id => ({
-        url: '/',
+        url: '/movies',
         method: 'DELETE',
-        body: id,
+        body: { movieId: id },
       }),
       invalidatesTags: ['Movies'],
     }),
   }),
 });
 
-export const { useGetMoviesQuery, useAddMovieMutation, usedeleteMovieMutation } = moviesBoxApi;
+export const { useGetMoviesQuery, useAddMovieMutation, useDeleteMovieMutation } = moviesBoxApi;

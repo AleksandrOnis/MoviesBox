@@ -3,17 +3,21 @@ import { toast } from 'react-toastify';
 import { Container, Spinner } from 'modules/common';
 import { MovieCard } from './components/MovieCard';
 import { deviceScreen } from 'utils/stylesVars';
+import { Pagination } from './components/Pagination';
 
-export const Gallery = ({ movies }) => {
+export const Gallery = ({ movies, getPage, pageCount }) => {
   return (
     <SectionGallery>
       <Container>
         {movies ? (
-          <MoviesList>
-            {movies.map(movie => {
-              return <MovieCard key={movie.id} movie={movie} />;
-            })}
-          </MoviesList>
+          <>
+            <MoviesList>
+              {movies.map(movie => {
+                return <MovieCard key={movie.id} movie={movie} />;
+              })}
+            </MoviesList>
+            <Pagination getPage={getPage} pageCount={pageCount} />
+          </>
         ) : (
           <Spinner />
         )}

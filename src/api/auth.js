@@ -3,7 +3,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const authApi = createApi({
   reducerPath: ['authApi'],
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://moviesbox-api.herokuapp.com/api',
+    baseUrl: 'http://localhost:3001/api',
+    // baseUrl: 'https://moviesbox-api.herokuapp.com/api',
   }),
   endpoints: builder => ({
     registerUser: builder.mutation({
