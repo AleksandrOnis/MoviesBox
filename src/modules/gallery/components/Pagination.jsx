@@ -8,7 +8,7 @@ export function Pagination({ getPage, pageCount }) {
   };
 
   return (
-    <>
+    pageCount > 1 && (
       <MyPaginate
         breakLabel="..."
         nextLabel=">>"
@@ -19,7 +19,7 @@ export function Pagination({ getPage, pageCount }) {
         renderOnZeroPageCount={null}
         marginPagesDisplayed={2}
       />
-    </>
+    )
   );
 }
 

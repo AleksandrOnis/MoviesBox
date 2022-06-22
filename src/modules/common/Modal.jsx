@@ -24,7 +24,6 @@ export const Modal = ({ children, closeModal, offListener, w, h, mb = 40, jc, ai
 
   const handleClose = () => {
     closeModal();
-    console.log('close');
   };
 
   const handleClick = e => {

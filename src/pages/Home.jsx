@@ -19,7 +19,6 @@ export const Home = () => {
   const { data: trendingMovies, isError, isLoading } = useGetTrendingMoviesQuery(page);
   const getSearchQuery = value => {
     setSearchQuery(value);
-    console.log(searchQuery);
   };
 
   const getPage = newPage => setPage(newPage);
@@ -32,9 +31,7 @@ export const Home = () => {
     searchQuery && setMovies(moviesByQuery);
   }, [moviesByQuery]);
 
-  useEffect(() => {
-    console.log('new page - ', page);
-  }, [page]);
+  useEffect(() => {}, [page]);
 
   return (
     <>

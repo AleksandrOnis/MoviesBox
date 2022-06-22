@@ -2,7 +2,6 @@ import { toast } from 'react-toastify';
 
 export function getOfficialTrailer(trailers = []) {
   if (trailers.length < 1) {
-    console.log('Sorry, trailer not found');
     toast.error('Sorry, trailer not found');
     return;
   }

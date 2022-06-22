@@ -6,6 +6,51 @@ import { useModal } from 'hooks';
 import { DescriptionMovie, Modal } from 'modules/common';
 import { moviesApi } from 'api/movies';
 
+export const MovieCard = ({ movie, addMovie, deleteMovie }) => {
+  const { title, release_date, vote_average = 'x.x', poster_path } = movie;
+  const { isModal, openModal, closeModal } = useModal();
+  const { data: genresList } = moviesApi.useGetGenresListQuery();
+  const genresMovie = getGenresMovie(genresList);
+  const genresIds = genresMovie(movie.genre_ids);
+  const genres = titlesGenres(genresIds);
+
+  const handleClick = () => {
+    openModal();
+  };
+
+  return (
+    <>
+      <Card onClick={handleClick}>
+        <WrapImage>
+          {poster_path ? (
+            <Image
+              src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+              alt={`Poster for movie ${title}`}
+            />
+          ) : (
+            <Image src={noPoster} alt={`No poster for movie ${title}`} />
+          )}
+        </WrapImage>
+        {/* <Thumb> */}
+        <WrapTitle>
+          <Title> {title} </Title>
+          <Year>{Number.parseInt(release_date)}</Year>
+        </WrapTitle>
+        <WrapInfo>
+          {genres}
+          <Vote>{vote_average}</Vote>
+        </WrapInfo>
+        {/* </Thumb> */}
+      </Card>
+      {isModal && (
+        <Modal isModal={isModal} closeModal={closeModal}>
+          {<DescriptionMovie movie={movie} addMovie={addMovie} deleteMovie={deleteMovie} />}
+        </Modal>
+      )}
+    </>
+  );
+};
+
 const Card = styled.li`
   display: flex;
   flex-direction: column;
@@ -74,49 +119,3 @@ const Vote = styled.span`
   color: #ffffff;
   background-color: #ff6b01;
 `;
-
-export const MovieCard = ({ movie }) => {
-  const { title, release_date, vote_average = 'x.x', poster_path } = movie;
-  const { isModal, openModal, closeModal } = useModal();
-
-  const { data: genresList } = moviesApi.useGetGenresListQuery();
-  const genresMovie = getGenresMovie(genresList);
-  const genresIds = genresMovie(movie.genre_ids);
-  const genres = titlesGenres(genresIds);
-
-  const handleClick = () => {
-    openModal();
-  };
-
-  return (
-    <>
-      <Card onClick={handleClick}>
-        <WrapImage>
-          {poster_path ? (
-            <Image
-              src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-              alt={`Poster for movie ${title}`}
-            />
-          ) : (
-            <Image src={noPoster} alt={`No poster for movie ${title}`} />
-          )}
-        </WrapImage>
-        {/* <Thumb> */}
-        <WrapTitle>
-          <Title> {title} </Title>
-          <Year>{Number.parseInt(release_date)}</Year>
-        </WrapTitle>
-        <WrapInfo>
-          {genres}
-          <Vote>{vote_average}</Vote>
-        </WrapInfo>
-        {/* </Thumb> */}
-      </Card>
-      {isModal && (
-        <Modal isModal={isModal} closeModal={closeModal}>
-          {<DescriptionMovie movie={movie} />}
-        </Modal>
-      )}
-    </>
-  );
-};

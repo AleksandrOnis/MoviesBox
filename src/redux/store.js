@@ -20,7 +20,7 @@ import storage from 'redux-persist/lib/storage';
 export const rootReducer = combineReducers({
   [moviesApi.reducerPath]: moviesApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
-  // [moviesBoxApi.reducerPath]: moviesBoxApi.reducer,
+  [moviesBoxApi.reducerPath]: moviesBoxApi.reducer,
   user: userSlice.reducer,
   theme: themeSlice.reducer,
 });
@@ -43,7 +43,7 @@ export const store = configureStore({
     }),
     moviesApi.middleware,
     authApi.middleware,
-    // moviesBoxApi.middleware,
+    moviesBoxApi.middleware,
   ],
 });
 

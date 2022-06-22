@@ -11,20 +11,18 @@ import { Gallery } from 'modules/gallery/Gallery';
 export const Library = () => {
   useLogOutRedirect();
   const [films, setFilms] = useState(null);
-  const { data } = useGetMoviesQuery();
-
+  const { data: movies } = useGetMoviesQuery();
   useEffect(() => {
-    // setFilms(data);
-    console.log(data);
-    console.log(useGetMoviesQuery);
-  }, [data]);
+    setFilms(movies);
+  }, [movies]);
 
   return (
     <>
       <Header>
         <Dashboard />
       </Header>
-      <Main>{data && <Gallery movies={data}></Gallery>}</Main>
+      <Main>{films && <Gallery movies={films}></Gallery>}</Main>
+
       <Footer />
     </>
   );

@@ -3,10 +3,9 @@ import { rootState } from 'redux/store';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: 'http://localhost:3001/api',
-  baseUrl: 'https://moviesbox-api.herokuapp.com/api',
+  // baseUrl: 'https://moviesbox-api.herokuapp.com/api',
   prepareHeaders: headers => {
     const TOKEN = rootState().user.token;
-    console.log(TOKEN);
     headers.set('authorization', `Bearer ${TOKEN}`);
     return headers;
   },
@@ -19,7 +18,6 @@ export const moviesBoxApi = createApi({
   endpoints: builder => ({
     getMovies: builder.query({
       query: (page = 1) => `/movies?page=${page}`,
-      transformResponse: response => response,
       providesTags: ['Movies'],
     }),
 
@@ -28,8 +26,8 @@ export const moviesBoxApi = createApi({
         url: `/movies/add`,
         method: 'POST',
         body,
-        invalidatesTags: ['Movies'],
       }),
+      invalidatesTags: ['Movies'],
     }),
     deleteMovie: builder.mutation({
       query: id => ({

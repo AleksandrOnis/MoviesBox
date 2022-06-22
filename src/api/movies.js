@@ -27,7 +27,6 @@ export const moviesApi = createApi({
     }),
     getTrendingMovies: builder.query({
       query: (page = 1) => `/trending/movie/week?page=${page}`,
-      transformResponse: response => response,
       providesTags: ['Films'],
     }),
     getTrailerById: builder.query({

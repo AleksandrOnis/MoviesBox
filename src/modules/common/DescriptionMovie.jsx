@@ -6,23 +6,12 @@ import { Button, Modal } from '.';
 import { useModal } from 'hooks/useModal';
 import { useGetTrailerByIdQuery } from 'api/movies';
 import { getOfficialTrailer } from 'utils/getOfficialTrailer';
-import { useAddMovieMutation, useDeleteMovieMutation } from 'api/moviesBox';
 
-export const DescriptionMovie = ({ movie = {} }) => {
-  const [addMovie] = useAddMovieMutation();
-  const [deleteMovie] = useDeleteMovieMutation();
-  const {
-    title,
-    genres_Ids,
-    release_date,
-    vote_average = 'x.x',
-    poster_path,
-    overview,
-    id,
-  } = movie;
+export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
+  const { title, genre_ids, release_date, vote_average, poster_path, overview, id } = movie;
+  const movieId = id || movie.movieId;
   const { isModal, openModal, closeModal } = useModal();
-
-  const { data: trailers } = useGetTrailerByIdQuery(id);
+  const { data: trailers } = useGetTrailerByIdQuery(movieId);
 
   let trailer = null;
   if (trailers) {
@@ -35,21 +24,23 @@ export const DescriptionMovie = ({ movie = {} }) => {
 
   const handleAddLibrary = async () => {
     try {
-      const data = { title, overview, movieId: id, poster_path, release_date, genres_Ids };
-      console.log('add', data);
+      const data = {
+        title,
+        overview,
+        movieId,
+        poster_path,
+        release_date,
+        genre_ids,
+        vote_average,
+      };
       await addMovie(data);
-    } catch (error) {
-      console.log('handleAddLibraryERROR', error);
-    }
+    } catch (error) {}
   };
 
   const handleDelLibrary = async () => {
     try {
-      console.log('idddddddddddddd', id);
-      await deleteMovie(id);
-    } catch (error) {
-      console.log('handleDelLibraryERROR', error);
-    }
+      await deleteMovie(movieId);
+    } catch (error) {}
   };
 
   return (

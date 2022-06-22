@@ -4,8 +4,11 @@ import { Container, Spinner } from 'modules/common';
 import { MovieCard } from './components/MovieCard';
 import { deviceScreen } from 'utils/stylesVars';
 import { Pagination } from './components/Pagination';
+import { useAddMovieMutation, useDeleteMovieMutation } from 'api/moviesBox';
 
 export const Gallery = ({ movies, getPage, pageCount }) => {
+  const [addMovie] = useAddMovieMutation();
+  const [deleteMovie] = useDeleteMovieMutation();
   return (
     <SectionGallery>
       <Container>
@@ -13,7 +16,15 @@ export const Gallery = ({ movies, getPage, pageCount }) => {
           <>
             <MoviesList>
               {movies.map(movie => {
-                return <MovieCard key={movie.id} movie={movie} />;
+                const movieId = movie.id || movie.movieId;
+                return (
+                  <MovieCard
+                    key={movieId}
+                    movie={movie}
+                    addMovie={addMovie}
+                    deleteMovie={deleteMovie}
+                  />
+                );
               })}
             </MoviesList>
             <Pagination getPage={getPage} pageCount={pageCount} />
