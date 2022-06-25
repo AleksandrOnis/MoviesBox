@@ -25,13 +25,12 @@ export const rootReducer = combineReducers({
   theme: themeSlice.reducer,
 });
 
-const persistConfig = {
-  key: 'theme',
+const rootPersistConfig = {
+  key: 'root',
   storage,
-  whitelist: ['theme'],
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
