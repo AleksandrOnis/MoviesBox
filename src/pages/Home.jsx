@@ -6,13 +6,13 @@ import { Footer } from 'modules/footer/Footer';
 import { Gallery } from 'modules/gallery/Gallery';
 import { useGetTrendingMoviesQuery, useGetMoviesBySearchQuery } from 'api/movies';
 import { useEffect, useState } from 'react';
+import { usePagination } from 'hooks/usePagination';
 
 // const isLoading = false;
 // (!isError && !isLoading) =>render // toast.error('Sorry, server not resonding');
 
 export const Home = () => {
-  const [page, setPage] = useState(1);
-  const [pageCount, setPageCount] = useState(0);
+  const { page, getPage, pageCount, setPageCount } = usePagination();
   const [searchQuery, setSearchQuery] = useState();
   const [movies, setMovies] = useState(null);
   const { data: moviesByQuery } = useGetMoviesBySearchQuery(searchQuery);
@@ -21,7 +21,6 @@ export const Home = () => {
     setSearchQuery(value);
   };
 
-  const getPage = newPage => setPage(newPage);
   useEffect(() => {
     setMovies(trendingMovies?.results);
     setPageCount(trendingMovies?.total_pages);
@@ -31,14 +30,12 @@ export const Home = () => {
     searchQuery && setMovies(moviesByQuery);
   }, [moviesByQuery]);
 
-  useEffect(() => {}, [page]);
-
   return (
     <>
       <Header>
         <Dashboard getSearchQuery={getSearchQuery} />
       </Header>
-      <Main id="main">
+      <Main>
         {/* {isLoading ? <Loader /> : <Gallery movies={movies} />} */}
         {movies && <Gallery movies={movies} getPage={getPage} pageCount={pageCount} />}
       </Main>

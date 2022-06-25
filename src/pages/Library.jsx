@@ -7,13 +7,17 @@ import { useLogOutRedirect } from 'hooks';
 import { useGetMoviesQuery } from 'api/moviesBox';
 import { useEffect, useState } from 'react';
 import { Gallery } from 'modules/gallery/Gallery';
+import { usePagination } from 'hooks/usePagination';
 
 export const Library = () => {
   useLogOutRedirect();
+  const { page, getPage, pageCount, setPageCount } = usePagination();
   const [films, setFilms] = useState(null);
-  const { data: movies } = useGetMoviesQuery();
+  const { data: movies } = useGetMoviesQuery(page);
+
   useEffect(() => {
-    setFilms(movies);
+    setFilms(movies.result);
+    setPageCount(movies.total_pages);
   }, [movies]);
 
   return (
@@ -21,7 +25,7 @@ export const Library = () => {
       <Header>
         <Dashboard />
       </Header>
-      <Main>{films && <Gallery movies={films}></Gallery>}</Main>
+      <Main>{films && <Gallery movies={films} getPage={getPage} pageCount={pageCount} />}</Main>
 
       <Footer />
     </>
