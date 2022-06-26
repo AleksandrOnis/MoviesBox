@@ -12,6 +12,10 @@ const HomePage = lazy(() => import('./pages/Home').then(module => ({ default: mo
 const LibraryPage = lazy(() =>
   import('./pages/Library').then(module => ({ default: module.Library })),
 );
+const SearchPage = lazy(() =>
+  import('./pages/Search').then(module => ({ default: module.Search })),
+);
+
 const Login = lazy(() => import('./pages/Login').then(module => ({ default: module.Login })));
 const Registration = lazy(() =>
   import('./pages/Registration').then(module => ({ default: module.Registration })),
@@ -27,6 +31,7 @@ function App() {
         <Routes>
           <Route path="home" element={<HomePage />} />
           <Route path="library" element={<LibraryPage />} />
+          <Route path="search" element={<SearchPage />} />
           <Route path="login" element={<Login />} />
           <Route path="registration" element={<Registration />} />
           <Route path="*" element={<Navigate to="/home" />} />

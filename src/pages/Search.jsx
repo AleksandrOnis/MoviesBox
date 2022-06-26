@@ -3,19 +3,19 @@ import { Header } from 'modules/header/Header';
 import { Dashboard } from 'modules/dashboard/Dashboard';
 import { Footer } from 'modules/footer/Footer';
 import { Gallery } from 'modules/gallery/Gallery';
-import { useGetTrendingMoviesQuery } from 'api/movies';
+import { useGetMoviesBySearchQuery } from 'api/movies';
 import { useEffect } from 'react';
-import { usePagination } from 'hooks';
+import { usePagination } from 'hooks/usePagination';
+import { useLocation } from 'react-router-dom';
 
-// const isLoading = false;
-// (!isError && !isLoading) =>render // toast.error('Sorry, server not resonding');
-
-export const Home = () => {
+export const Search = () => {
+  const location = useLocation();
   const { page, getPage, pageCount, setPageCount } = usePagination();
-  const { data: movies, isError, isLoading } = useGetTrendingMoviesQuery(page);
+  const queryFromSearchParameter = new URLSearchParams(location.search).get('query');
+  const { data: movies } = useGetMoviesBySearchQuery(queryFromSearchParameter, page);
 
   useEffect(() => {
-    setPageCount(movies?.total_pages);
+    setPageCount(movies?.total_results);
   }, [movies]);
 
   return (

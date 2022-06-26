@@ -5,6 +5,7 @@ import { Input } from 'modules/common';
 import { deviceScreen } from 'utils/stylesVars';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Form = styled.form`
   display: flex;
@@ -32,6 +33,7 @@ const SearchIcon = styled(BiSearchAlt2)`
 
 export const SearchBar = ({ getSearchQuery: sendSearchQuery }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -40,8 +42,7 @@ export const SearchBar = ({ getSearchQuery: sendSearchQuery }) => {
       setSearchQuery('');
       return;
     }
-    sendSearchQuery(searchQuery);
-    setSearchQuery('');
+    navigate(`/search?query=${searchQuery}`);
   };
 
   return (
