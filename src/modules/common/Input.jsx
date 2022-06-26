@@ -1,6 +1,20 @@
 import styled from 'styled-components';
 import { color } from 'utils/stylesVars';
 
+export const Input = ({ icon, setValue, onChange, ...otherProps }) => {
+  const handleChange = e => {
+    const { value } = e.target;
+    setValue(value);
+  };
+
+  return (
+    <InputWrap>
+      <StyledInput icon={icon} onChange={onChange ? onChange : handleChange} {...otherProps} />
+      {icon && <Icon src={icon} />}
+    </InputWrap>
+  );
+};
+
 const InputWrap = styled.div`
   position: relative;
 `;
@@ -41,17 +55,3 @@ const Icon = styled.img`
   top: -2px;
   left: 8px;
 `;
-
-export const Input = ({ icon, setValue, onChange, ...otherProps }) => {
-  const handleChange = e => {
-    const { value } = e.target;
-    setValue(value);
-  };
-
-  return (
-    <InputWrap>
-      <StyledInput icon={icon} onChange={onChange ? onChange : handleChange} {...otherProps} />
-      {icon && <Icon src={icon} />}
-    </InputWrap>
-  );
-};

@@ -6,6 +6,20 @@ import { login } from 'redux/selectors';
 import { useSelector } from 'react-redux';
 import { deviceScreen } from 'utils/stylesVars';
 
+export const UserMenu = () => {
+  const dispatch = useDispatch();
+  const userName = useSelector(login);
+
+  return (
+    <Wrap>
+      <Name>{userName}</Name>
+      <Button w="80px" onClick={() => dispatch(logOut())}>
+        Log out
+      </Button>
+    </Wrap>
+  );
+};
+
 const Wrap = styled.div``;
 
 const Name = styled.p`
@@ -21,17 +35,3 @@ const Name = styled.p`
     color: #fff;
   }
 `;
-
-export const UserMenu = () => {
-  const dispatch = useDispatch();
-  const userName = useSelector(login);
-
-  return (
-    <Wrap>
-      <Name>{userName}</Name>
-      <Button w="80px" onClick={() => dispatch(logOut())}>
-        Log out
-      </Button>
-    </Wrap>
-  );
-};

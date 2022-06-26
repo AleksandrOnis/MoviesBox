@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { color } from 'utils/stylesVars';
 
+export const Button = ({ children, ...otherProps }) => {
+  return <StyledButton {...otherProps}>{children}</StyledButton>;
+};
+
 const StyledButton = styled.button.attrs(({ type }) => ({
   type: type || 'button',
 }))`
@@ -27,7 +31,3 @@ const StyledButton = styled.button.attrs(({ type }) => ({
       accent ? '5px 5px 8px rgba(0, 0, 0, 0.6)' : '4px 4px 5px rgba(255, 107, 1, 0.6)'};
   }
 `;
-
-export const Button = ({ children, ...otherProps }) => {
-  return <StyledButton {...otherProps}>{children}</StyledButton>;
-};

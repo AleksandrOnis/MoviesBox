@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 
-const LoaderThumb = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-`;
-
 export const Loader = () => {
   return (
     <LoaderThumb>
@@ -13,3 +7,9 @@ export const Loader = () => {
     </LoaderThumb>
   );
 };
+
+const LoaderThumb = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+`;

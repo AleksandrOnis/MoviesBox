@@ -8,10 +8,6 @@ import { useRegisterUserMutation } from 'api/auth';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
-const Form = styled.form`
-  text-align: center;
-`;
-
 export const RegistrationForm = () => {
   const [registerUser] = useRegisterUserMutation();
   const [name, setName] = useState('');
@@ -63,9 +59,14 @@ export const RegistrationForm = () => {
         mb="30px"
         required
       />
-      <Button type="submit" accent disabled={!name || !email || !password}>
+      {/* <Button type="submit" accent disabled={!name || !email || !password}> */}
+      <Button type="submit" accent>
         Registration
       </Button>
     </Form>
   );
 };
+
+const Form = styled.form`
+  text-align: center;
+`;

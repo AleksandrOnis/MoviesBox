@@ -8,6 +8,22 @@ import { color } from 'utils/stylesVars';
 import { deviceScreen } from 'utils/stylesVars';
 import { useNavigate } from 'react-router-dom';
 
+export const Registration = () => {
+  const navigate = useNavigate();
+  return (
+    <Container>
+      <HeroWrap>
+        <Hero image={imageHero} />
+      </HeroWrap>
+      <FormWrap>
+        <Logo />
+        <RegistrationForm />
+        <Button onClick={() => navigate('/login')}>Login</Button>
+      </FormWrap>
+    </Container>
+  );
+};
+
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
@@ -49,19 +65,3 @@ const FormWrap = styled.div`
     width: 50%;
   }
 `;
-
-export const Registration = () => {
-  const navigate = useNavigate();
-  return (
-    <Container>
-      <HeroWrap>
-        <Hero image={imageHero} />
-      </HeroWrap>
-      <FormWrap>
-        <Logo />
-        <RegistrationForm />
-        <Button onClick={() => navigate('/login')}>Login</Button>
-      </FormWrap>
-    </Container>
-  );
-};

@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { deviceScreen } from 'utils/stylesVars';
 
+export const Container = ({ children }) => {
+  return <StyledContainer>{children}</StyledContainer>;
+};
+
 const StyledContainer = styled.div`
   padding: 20px;
   width: 320px;
@@ -19,7 +23,3 @@ const StyledContainer = styled.div`
     width: 1280px;
   }
 `;
-
-export const Container = ({ children }) => {
-  return <StyledContainer>{children}</StyledContainer>;
-};

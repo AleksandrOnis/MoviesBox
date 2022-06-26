@@ -3,6 +3,15 @@ import { NavLink } from 'react-router-dom';
 import { color } from 'utils/stylesVars';
 import { deviceScreen } from 'utils/stylesVars';
 
+export const Navigation = props => {
+  return (
+    <NavList>
+      <StyledNav to="/home">Home</StyledNav>
+      <StyledNav to="/library">Library</StyledNav>
+    </NavList>
+  );
+};
+
 const NavList = styled.ul`
   padding: 0;
   font-size: 22px;
@@ -53,12 +62,3 @@ const StyledNav = styled(NavLink)`
     }
   }
 `;
-
-export const Navigation = props => {
-  return (
-    <NavList>
-      <StyledNav to="/home">Home</StyledNav>
-      <StyledNav to="/library">Library</StyledNav>
-    </NavList>
-  );
-};

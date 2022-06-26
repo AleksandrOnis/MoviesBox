@@ -2,6 +2,24 @@ import styled from 'styled-components';
 import { Wrap } from 'modules/common/Wrap';
 import { deviceScreen, color } from 'utils/stylesVars';
 
+export const Footer = () => {
+  return (
+    <StyledFooter>
+      <Wrap jc="center">
+        <Text>
+          <AccentWrap>&copy;</AccentWrap> 2022
+        </Text>
+        <Text>All Rights Reserved</Text>
+        <Text>
+          Developed
+          <AccentWrap> by </AccentWrap>
+          <Name>Oleksandr Onyshchenko</Name>
+        </Text>
+      </Wrap>
+    </StyledFooter>
+  );
+};
+
 const StyledFooter = styled.footer`
   padding: 20px;
   line-height: 14px;
@@ -28,21 +46,3 @@ const Text = styled.p`
 const Name = styled.span`
   white-space: nowrap;
 `;
-
-export const Footer = () => {
-  return (
-    <StyledFooter>
-      <Wrap jc="center">
-        <Text>
-          <AccentWrap>&copy;</AccentWrap> 2022
-        </Text>
-        <Text>All Rights Reserved</Text>
-        <Text>
-          Developed
-          <AccentWrap> by </AccentWrap>
-          <Name>Oleksandr Onyshchenko</Name>
-        </Text>
-      </Wrap>
-    </StyledFooter>
-  );
-};

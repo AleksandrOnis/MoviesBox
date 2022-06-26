@@ -7,6 +7,19 @@ import bgImgM from 'images/header-bg/bgimg@2x.jpg';
 import { deviceScreen, color } from 'utils/stylesVars';
 import { Authorization } from './components/authMenu/Authorization';
 
+export const Header = ({ children }) => {
+  return (
+    <StyledHeader>
+      <Wrap jc="space-between">
+        <Logo mobileHidden />
+        <Navigation />
+        <Authorization />
+      </Wrap>
+      {children}
+    </StyledHeader>
+  );
+};
+
 const StyledHeader = styled.header`
   display: flex;
   flex-direction: column;
@@ -32,16 +45,3 @@ const StyledHeader = styled.header`
     background-image: url(${bgImgD});
   }
 `;
-
-export const Header = ({ children }) => {
-  return (
-    <StyledHeader>
-      <Wrap jc="space-between">
-        <Logo mobileHidden />
-        <Navigation />
-        <Authorization />
-      </Wrap>
-      {children}
-    </StyledHeader>
-  );
-};

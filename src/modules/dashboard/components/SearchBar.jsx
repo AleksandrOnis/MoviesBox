@@ -7,30 +7,6 @@ import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Form = styled.form`
-  display: flex;
-  align-items: center;
-`;
-
-const StyledInput = styled(Input)`
-  max-width: 180px;
-  ${deviceScreen.M} {
-    max-width: 220px;
-  }
-`;
-
-const Button = styled.button`
-  padding: 10px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-`;
-
-const SearchIcon = styled(BiSearchAlt2)`
-  width: 24px;
-  height: 24px;
-`;
-
 export const SearchBar = ({ getSearchQuery: sendSearchQuery }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
@@ -61,3 +37,27 @@ export const SearchBar = ({ getSearchQuery: sendSearchQuery }) => {
     </Form>
   );
 };
+
+const Form = styled.form`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledInput = styled(Input)`
+  max-width: 180px;
+  ${deviceScreen.M} {
+    max-width: 220px;
+  }
+`;
+
+const Button = styled.button`
+  padding: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+`;
+
+const SearchIcon = styled(BiSearchAlt2)`
+  width: 24px;
+  height: 24px;
+`;

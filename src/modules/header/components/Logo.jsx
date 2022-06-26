@@ -3,6 +3,17 @@ import logo from 'images/icons/logo.svg';
 import { Wrap, StyledNavLink } from 'modules/common';
 import { color, deviceScreen } from 'utils/stylesVars';
 
+export const Logo = ({ title = 'MoviesBox', mobileHidden }) => {
+  return (
+    <Wrap fd="row" g="10px">
+      <StyledLogo src={logo} />
+      <StyledNavLink to="/main">
+        <Title mobileHidden={mobileHidden}>{title}</Title>
+      </StyledNavLink>
+    </Wrap>
+  );
+};
+
 const rotateAnimation = keyframes`
   0% {
     transform:rotateZ(0deg);
@@ -40,14 +51,3 @@ const Title = styled.h1`
     }
   }
 `;
-
-export const Logo = ({ title = 'MoviesBox', mobileHidden }) => {
-  return (
-    <Wrap fd="row" g="10px">
-      <StyledLogo src={logo} />
-      <StyledNavLink to="/main">
-        <Title mobileHidden={mobileHidden}>{title}</Title>
-      </StyledNavLink>
-    </Wrap>
-  );
-};

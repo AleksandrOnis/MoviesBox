@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const Wrap = props => {
+  return <StyledWrap {...props}></StyledWrap>;
+};
+
 const StyledWrap = styled.div`
   display: flex;
   flex-direction: ${({ fd = 'row' }) => fd};
@@ -12,7 +16,3 @@ const StyledWrap = styled.div`
   height: ${({ h = 'auto' }) => h};
   gap: ${({ g = 0 }) => g};
 `;
-
-export const Wrap = props => {
-  return <StyledWrap {...props}></StyledWrap>;
-};

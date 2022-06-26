@@ -1,6 +1,10 @@
 import 'normalize.css';
 import { createGlobalStyle } from 'styled-components';
 
+export const GlobalStyle = () => {
+  return <GlobalStyled />;
+};
+
 const GlobalStyled = createGlobalStyle`
   *, *::after, *::before{
     box-sizing: border-box;
@@ -44,7 +48,3 @@ const GlobalStyled = createGlobalStyle`
   }
 
 `;
-
-export const GlobalStyle = () => {
-  return <GlobalStyled />;
-};

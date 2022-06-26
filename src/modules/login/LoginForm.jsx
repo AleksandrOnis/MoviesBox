@@ -9,10 +9,6 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/user/userSlice';
 
-const Form = styled.form`
-  text-align: center;
-`;
-
 export const LoginForm = () => {
   const [loginUser] = useLoginUserMutation();
   const [email, setEmail] = useState('');
@@ -54,9 +50,14 @@ export const LoginForm = () => {
         mb="30px"
         required
       />
-      <Button type="submit" accent disabled={!email || !password}>
+      {/* <Button type="submit" accent disabled={!email || !password}> */}
+      <Button type="submit" accent>
         Login
       </Button>
     </Form>
   );
 };
+
+const Form = styled.form`
+  text-align: center;
+`;
