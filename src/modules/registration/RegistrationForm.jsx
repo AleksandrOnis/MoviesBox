@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 export const RegistrationForm = () => {
-  const [registerUser] = useRegisterUserMutation();
+  const [registerUser, { isLoading }] = useRegisterUserMutation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -60,7 +60,7 @@ export const RegistrationForm = () => {
         required
       />
       {/* <Button type="submit" accent disabled={!name || !email || !password}> */}
-      <Button type="submit" accent>
+      <Button type="submit" accent isLoading={isLoading}>
         Registration
       </Button>
     </Form>

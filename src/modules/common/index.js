@@ -12,6 +12,7 @@ import { Spinner } from './Spinner';
 import { DescriptionMovie } from './DescriptionMovie';
 import { Button } from './Button';
 import { Input } from './Input';
+import { SpinnerCircles } from './SpinnerCircles';
 
 export {
   GlobalStyle,
@@ -28,4 +29,5 @@ export {
   DescriptionMovie,
   Button,
   Input,
+  SpinnerCircles,
 };

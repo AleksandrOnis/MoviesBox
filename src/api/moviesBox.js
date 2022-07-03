@@ -2,8 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { rootState } from 'redux/store';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:3001/api',
-  // baseUrl: 'https://moviesbox-api.herokuapp.com/api',
+  // baseUrl: 'http://localhost:3001/api',
+  baseUrl: 'https://moviesbox-api.herokuapp.com/api',
   prepareHeaders: headers => {
     const TOKEN = rootState().user.token;
     headers.set('authorization', `Bearer ${TOKEN}`);

@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/user/userSlice';
 
 export const LoginForm = () => {
-  const [loginUser] = useLoginUserMutation();
+  const [loginUser, { isLoading }] = useLoginUserMutation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ export const LoginForm = () => {
         required
       />
       {/* <Button type="submit" accent disabled={!email || !password}> */}
-      <Button type="submit" accent>
+      <Button type="submit" accent isLoading={isLoading}>
         Login
       </Button>
     </Form>

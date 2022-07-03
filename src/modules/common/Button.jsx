@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { color } from 'utils/stylesVars';
+import { SpinnerCircles } from '.';
 
-export const Button = ({ children, ...otherProps }) => {
-  return <StyledButton {...otherProps}>{children}</StyledButton>;
+export const Button = ({ children, isLoading, ...otherProps }) => {
+  return <StyledButton {...otherProps}>{isLoading ? <SpinnerCircles /> : children}</StyledButton>;
 };
 
 const StyledButton = styled.button.attrs(({ type }) => ({
@@ -12,11 +13,11 @@ const StyledButton = styled.button.attrs(({ type }) => ({
   min-width: ${({ w }) => (w ? w : '120px')};
   height: 40px;
 
-  padding: 10px;
+  padding-top: 5px;
   font-size: 14px;
   line-height: 1.2;
   text-transform: uppercase;
-  color: #fff;
+  color: ${color.light};
 
   border: 2px solid ${color.accent};
   border-radius: 20px;
