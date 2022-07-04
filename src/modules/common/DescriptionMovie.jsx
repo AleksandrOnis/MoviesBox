@@ -1,17 +1,20 @@
 import styled from 'styled-components';
-import { deviceScreen } from 'utils/stylesVars';
+import { color, deviceScreen } from 'utils/stylesVars';
 import noPoster from 'images/film.jpg';
 import ReactPlayer from 'react-player';
 import { Button, Modal } from '.';
 import { useModal } from 'hooks/useModal';
 import { useGetTrailerByIdQuery } from 'api/movies';
 import { getOfficialTrailer } from 'utils/getOfficialTrailer';
+import { useSelector } from 'react-redux';
+import { isLoggedIn } from 'redux/selectors';
 
 export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
   const { title, genre_ids, release_date, vote_average, poster_path, overview, id } = movie;
   const movieId = id || movie.movieId;
   const { isModal, openModal, closeModal } = useModal();
   const { data: trailers } = useGetTrailerByIdQuery(movieId);
+  const isLogined = useSelector(isLoggedIn);
 
   let trailer = null;
   if (trailers) {
@@ -43,6 +46,8 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
     } catch (error) {}
   };
 
+  const isAdded = true;
+
   return (
     <>
       <Container>
@@ -65,13 +70,20 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
             <Button w="140px" accent onClick={handleOpenModal}>
               Watch trailer
             </Button>
-            <Button w="140px" accent onClick={handleAddLibrary}>
-              Add to library
-            </Button>
+            {!isLogined ? (
+              <Button w="140px" disabled>
+                Login to add
+              </Button>
+            ) : isAdded ? (
+              <Button w="140px" accent onClick={handleAddLibrary}>
+                Del from library
+              </Button>
+            ) : (
+              <Button w="140px" accent onClick={handleDelLibrary}>
+                Add to library
+              </Button>
+            )}
           </WrapButton>
-          <Button w="140px" accent onClick={handleDelLibrary}>
-            Del from library
-          </Button>
         </WrapContent>
       </Container>
 

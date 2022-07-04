@@ -12,7 +12,11 @@ import { usePagination } from 'hooks';
 
 export const Home = () => {
   const { page, getPage, pageCount, setPageCount } = usePagination();
-  const { data: movies, isError, isLoading } = useGetTrendingMoviesQuery(page);
+  const {
+    data: movies,
+    isError,
+    isLoading,
+  } = useGetTrendingMoviesQuery(page, { refetchOnMountOrArgChange: 600 });
 
   useEffect(() => {
     setPageCount(movies?.total_pages);

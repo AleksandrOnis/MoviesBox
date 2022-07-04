@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { color } from 'utils/stylesVars';
 import { SpinnerCircles } from '.';
 
@@ -30,5 +30,16 @@ const StyledButton = styled.button.attrs(({ type }) => ({
     transform: scale(1.05);
     box-shadow: ${({ accent }) =>
       accent ? '5px 5px 8px rgba(0, 0, 0, 0.6)' : '4px 4px 5px rgba(255, 107, 1, 0.6)'};
+  }
+
+  &:disabled {
+    color: #000;
+    background: lightGrey;
+    border: none;
+    :hover,
+    :focus {
+      transform: scale(1);
+      box-shadow: none;
+    }
   }
 `;

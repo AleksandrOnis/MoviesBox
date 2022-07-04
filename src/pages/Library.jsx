@@ -10,7 +10,7 @@ import { Gallery } from 'modules/gallery/Gallery';
 export const Library = () => {
   useLogOutRedirect();
   const { page, getPage, pageCount, setPageCount } = usePagination();
-  const { data: movies } = useGetMoviesQuery(page);
+  const { data: movies } = useGetMoviesQuery(page, { refetchOnMountOrArgChange: 600 });
 
   useEffect(() => {
     setPageCount(movies?.total_pages);
