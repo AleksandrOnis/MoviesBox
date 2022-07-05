@@ -17,7 +17,7 @@ const StyledButton = styled.button.attrs(({ type }) => ({
   font-size: 14px;
   line-height: 1.2;
   text-transform: uppercase;
-  color: ${color.light};
+  color: ${({ colorText }) => (colorText ? colorText : color.light)};
 
   border: 2px solid ${color.accent};
   border-radius: 20px;

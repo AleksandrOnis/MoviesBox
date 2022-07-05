@@ -7,7 +7,8 @@ import { useModal } from 'hooks/useModal';
 import { useGetTrailerByIdQuery } from 'api/movies';
 import { getOfficialTrailer } from 'utils/getOfficialTrailer';
 import { useSelector } from 'react-redux';
-import { isLoggedIn } from 'redux/selectors';
+import { isLoggedIn, moviesIds } from 'redux/selectors';
+import { useState, useEffect } from 'react';
 
 export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
   const { title, genre_ids, release_date, vote_average, poster_path, overview, id } = movie;
@@ -15,6 +16,8 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
   const { isModal, openModal, closeModal } = useModal();
   const { data: trailers } = useGetTrailerByIdQuery(movieId);
   const isLogined = useSelector(isLoggedIn);
+  const filmsIds = useSelector(moviesIds);
+  const [isAdded, setIsAdded] = useState(false);
 
   let trailer = null;
   if (trailers) {
@@ -36,17 +39,21 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
         genre_ids,
         vote_average,
       };
-      await addMovie(data);
+      const result = await addMovie(data);
+      result && setIsAdded(true);
     } catch (error) {}
   };
 
   const handleDelLibrary = async () => {
     try {
       await deleteMovie(movieId);
+      setIsAdded(false);
     } catch (error) {}
   };
 
-  const isAdded = true;
+  useEffect(() => {
+    setIsAdded(filmsIds.find(filmId => filmId === movieId));
+  }, []);
 
   return (
     <>
@@ -75,11 +82,11 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
                 Login to add
               </Button>
             ) : isAdded ? (
-              <Button w="140px" accent onClick={handleAddLibrary}>
+              <Button w="140px" colorText="red" onClick={handleDelLibrary}>
                 Del from library
               </Button>
             ) : (
-              <Button w="140px" accent onClick={handleDelLibrary}>
+              <Button w="140px" accent onClick={handleAddLibrary}>
                 Add to library
               </Button>
             )}
