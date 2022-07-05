@@ -5,6 +5,7 @@ import { authApi } from 'api/auth';
 import { moviesBoxApi } from 'api/moviesBox';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { themeSlice } from './theme/themeSlice';
+import { moviesBoxSlice } from './moviesBox/moviesBoxSlice';
 import {
   persistStore,
   persistReducer,
@@ -23,6 +24,7 @@ export const rootReducer = combineReducers({
   [moviesBoxApi.reducerPath]: moviesBoxApi.reducer,
   user: userSlice.reducer,
   theme: themeSlice.reducer,
+  moviesBox: moviesBoxSlice.reducer,
 });
 
 const rootPersistConfig = {

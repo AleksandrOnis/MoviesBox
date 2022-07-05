@@ -6,15 +6,22 @@ import { useLogOutRedirect, usePagination } from 'hooks';
 import { useGetMoviesQuery } from 'api/moviesBox';
 import { useEffect } from 'react';
 import { Gallery } from 'modules/gallery/Gallery';
-
+import { useDispatch } from 'react-redux';
+import { moviesIds } from 'redux/moviesBox/moviesBoxSlice';
 export const Library = () => {
   useLogOutRedirect();
   const { page, getPage, pageCount, setPageCount } = usePagination();
-  const { data: movies } = useGetMoviesQuery(page, { refetchOnMountOrArgChange: 600 });
+  const { data: movies } = useGetMoviesQuery(page, { refetchOnMountOrArgChange: true });
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setPageCount(movies?.total_pages);
+    dispatch(moviesIds(movies?.moviesIds));
   }, [movies]);
+
+  useEffect(() => {
+    // чистити кеш
+  }, []);
 
   return (
     <>
