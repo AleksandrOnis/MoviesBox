@@ -11,7 +11,13 @@ export const moviesBoxSlice = createSlice({
     moviesIds: (state, action) => {
       state.moviesIds = action.payload;
     },
+    addMovieId: (state, action) => {
+      state.moviesIds = [...state.moviesIds, action.payload];
+    },
+    delMovieId: (state, action) => {
+      state.moviesIds = state.moviesIds.filter(movieId => movieId !== action.payload);
+    },
   },
 });
 
-export const { moviesIds } = moviesBoxSlice.actions;
+export const { moviesIds, addMovieId, delMovieId } = moviesBoxSlice.actions;

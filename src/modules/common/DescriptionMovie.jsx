@@ -6,9 +6,10 @@ import { Button, Modal } from '.';
 import { useModal } from 'hooks/useModal';
 import { useGetTrailerByIdQuery } from 'api/movies';
 import { getOfficialTrailer } from 'utils/getOfficialTrailer';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { isLoggedIn, moviesIds } from 'redux/selectors';
 import { useState, useEffect } from 'react';
+import { addMovieId, delMovieId } from 'redux/moviesBox/moviesBoxSlice';
 
 export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
   const { title, genre_ids, release_date, vote_average, poster_path, overview, id } = movie;
@@ -18,6 +19,7 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
   const isLogined = useSelector(isLoggedIn);
   const filmsIds = useSelector(moviesIds);
   const [isAdded, setIsAdded] = useState(false);
+  const dispatch = useDispatch();
 
   let trailer = null;
   if (trailers) {
@@ -40,14 +42,21 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
         vote_average,
       };
       const result = await addMovie(data);
-      result && setIsAdded(true);
+      //можна переписати логіку оновлення через кеш
+      if (result) {
+        setIsAdded(true);
+        dispatch(addMovieId(movieId));
+      }
     } catch (error) {}
   };
 
   const handleDelLibrary = async () => {
     try {
-      await deleteMovie(movieId);
-      setIsAdded(false);
+      const result = await deleteMovie(movieId);
+      if (result) {
+        setIsAdded(false);
+        dispatch(delMovieId(movieId));
+      }
     } catch (error) {}
   };
 
