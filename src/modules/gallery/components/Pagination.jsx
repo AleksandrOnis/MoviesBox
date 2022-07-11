@@ -5,6 +5,7 @@ import { color, deviceScreen } from 'utils/stylesVars';
 export function Pagination({ getPage, pageCount }) {
   const handlePageClick = event => {
     getPage(event.selected + 1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (

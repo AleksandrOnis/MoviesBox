@@ -1,4 +1,4 @@
-import { Loader, Main } from 'modules/common';
+import { Main, NotFound } from 'modules/common';
 import { Header } from 'modules/header/Header';
 import { Dashboard } from 'modules/dashboard/Dashboard';
 import { Footer } from 'modules/footer/Footer';
@@ -24,7 +24,7 @@ export const Search = () => {
         <Dashboard />
       </Header>
       <Main>
-        {/* {isLoading ? <Loader /> : <Gallery movies={movies} />} */}
+        {movies?.results.length === 0 && <NotFound>Nothing found for this request!</NotFound>}
         {movies && <Gallery movies={movies.results} getPage={getPage} pageCount={pageCount} />}
       </Main>
       <Footer />

@@ -13,6 +13,8 @@ import { DescriptionMovie } from './DescriptionMovie';
 import { Button } from './Button';
 import { Input } from './Input';
 import { SpinnerCircles } from './SpinnerCircles';
+import { ButtonArrow } from './ButtonArrow';
+import { NotFound } from './NotFound';
 
 export {
   GlobalStyle,
@@ -30,4 +32,6 @@ export {
   Button,
   Input,
   SpinnerCircles,
+  ButtonArrow,
+  NotFound,
 };

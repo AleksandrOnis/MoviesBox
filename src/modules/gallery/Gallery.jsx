@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { toast } from 'react-toastify';
-import { Container, Spinner } from 'modules/common';
+import { ButtonArrow, Container, Spinner } from 'modules/common';
 import { MovieCard } from './components/MovieCard';
 import { deviceScreen } from 'utils/stylesVars';
 import { Pagination } from './components/Pagination';
@@ -9,6 +8,7 @@ import { useAddMovieMutation, useDeleteMovieMutation } from 'api/moviesBox';
 export const Gallery = ({ movies, getPage, pageCount }) => {
   const [addMovie] = useAddMovieMutation();
   const [deleteMovie] = useDeleteMovieMutation();
+
   return (
     <SectionGallery>
       <Container>
@@ -28,6 +28,7 @@ export const Gallery = ({ movies, getPage, pageCount }) => {
               })}
             </MoviesList>
             <Pagination getPage={getPage} pageCount={pageCount} />
+            {movies?.length > 9 && <ButtonArrow />}
           </>
         ) : (
           <Spinner />
