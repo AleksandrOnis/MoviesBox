@@ -21,6 +21,7 @@ export const LoginForm = () => {
     const body = { email, password };
     try {
       const response = await loginUser(body);
+      if (response.error) throw new Error(response.error.data.message);
       dispatch(logIn(response));
       navigate('/library');
     } catch (error) {

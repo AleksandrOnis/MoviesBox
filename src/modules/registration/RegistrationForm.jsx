@@ -19,7 +19,8 @@ export const RegistrationForm = () => {
     event.preventDefault();
     const body = { name, email, password };
     try {
-      await registerUser(body);
+      const response = await registerUser(body);
+      if (response.error) throw new Error(response.error.data.message);
       toast.success('You are successfully registered');
       navigate('/login');
     } catch (error) {
