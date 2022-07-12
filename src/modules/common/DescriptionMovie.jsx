@@ -19,6 +19,7 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
   const isLogined = useSelector(isLoggedIn);
   const filmsIds = useSelector(moviesIds);
   const [isAdded, setIsAdded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
   let trailer = null;
@@ -32,6 +33,7 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
 
   const handleAddLibrary = async () => {
     try {
+      setIsLoading(true);
       const data = {
         title,
         overview,
@@ -47,17 +49,24 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
         setIsAdded(true);
         dispatch(addMovieId(movieId));
       }
-    } catch (error) {}
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleDelLibrary = async () => {
     try {
+      setIsLoading(true);
       const result = await deleteMovie(movieId);
       if (result) {
         setIsAdded(false);
         dispatch(delMovieId(movieId));
       }
-    } catch (error) {}
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -91,11 +100,11 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
                 Login to add
               </Button>
             ) : isAdded ? (
-              <Button w="140px" colorText="red" onClick={handleDelLibrary}>
+              <Button w="140px" colorText="red" onClick={handleDelLibrary} isLoading={isLoading}>
                 Del from library
               </Button>
             ) : (
-              <Button w="140px" accent onClick={handleAddLibrary}>
+              <Button w="140px" accent onClick={handleAddLibrary} isLoading={isLoading}>
                 Add to library
               </Button>
             )}

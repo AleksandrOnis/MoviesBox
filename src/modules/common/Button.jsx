@@ -25,8 +25,13 @@ const StyledButton = styled.button.attrs(({ type }) => ({
 
   cursor: pointer;
 
-  :hover,
-  :focus {
+  :hover {
+    transform: scale(1.05);
+    box-shadow: ${({ accent }) =>
+      accent ? '5px 5px 8px rgba(0, 0, 0, 0.6)' : '4px 4px 5px rgba(255, 107, 1, 0.6)'};
+  }
+
+  :focus-visible {
     transform: scale(1.05);
     box-shadow: ${({ accent }) =>
       accent ? '5px 5px 8px rgba(0, 0, 0, 0.6)' : '4px 4px 5px rgba(255, 107, 1, 0.6)'};
