@@ -35,19 +35,16 @@ const Title = styled.h1`
   display: ${({ mobileHidden }) => (mobileHidden ? 'none' : 'block')};
   margin: 0;
   padding: 0;
+  font-size: 30px;
+  line-height: 35px;
+  font-weight: 500;
+  color: #ffffff;
 
-  &.mobileHidden {
+  :hover {
+    color: ${color.accent};
   }
 
   ${deviceScreen.M} {
     display: block;
-    font-size: 30px;
-    line-height: 35px;
-    font-weight: 500;
-    color: #ffffff;
-
-    :hover {
-      color: ${color.accent};
-    }
   }
 `;
