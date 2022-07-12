@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { SearchBar, ToggleTheme } from './components';
 
-export const Dashboard = ({ getSearchQuery }) => {
+export const Dashboard = () => {
   return (
     <StyledDashboard>
-      <SearchBar getSearchQuery={getSearchQuery} />
+      <SearchBar />
       <ToggleTheme />
     </StyledDashboard>
   );

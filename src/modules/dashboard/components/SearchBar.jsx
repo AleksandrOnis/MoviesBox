@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const SearchBar = ({ getSearchQuery: sendSearchQuery }) => {
+export const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -18,6 +18,7 @@ export const SearchBar = ({ getSearchQuery: sendSearchQuery }) => {
       setSearchQuery('');
       return;
     }
+    setSearchQuery('');
     navigate(`/search?query=${searchQuery}`);
   };
 

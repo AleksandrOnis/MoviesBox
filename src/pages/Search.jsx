@@ -6,17 +6,25 @@ import { Gallery } from 'modules/gallery/Gallery';
 import { useGetMoviesBySearchQuery } from 'api/movies';
 import { useEffect } from 'react';
 import { usePagination } from 'hooks/usePagination';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const Search = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const { page, getPage, pageCount, setPageCount } = usePagination();
   const queryFromSearchParameter = new URLSearchParams(location.search).get('query');
-  const { data: movies } = useGetMoviesBySearchQuery(queryFromSearchParameter, page);
+  const { data: movies } = useGetMoviesBySearchQuery({
+    query: queryFromSearchParameter,
+    page,
+  });
 
   useEffect(() => {
-    setPageCount(movies?.total_results);
+    setPageCount(movies?.total_pages);
   }, [movies]);
+
+  useEffect(() => {
+    navigate(`/search?query=${queryFromSearchParameter}&page=${page}`);
+  }, [page]);
 
   return (
     <>

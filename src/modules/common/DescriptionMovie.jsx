@@ -61,7 +61,7 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
   };
 
   useEffect(() => {
-    setIsAdded(filmsIds.find(filmId => filmId === movieId));
+    setIsAdded(filmsIds?.find(filmId => filmId === movieId));
   }, []);
 
   return (
