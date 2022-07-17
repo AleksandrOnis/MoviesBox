@@ -11,7 +11,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 export const Search = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { page, getPage, pageCount, setPageCount } = usePagination();
+  const { page, setPage, pageCount, setPageCount } = usePagination();
   const queryFromSearchParameter = new URLSearchParams(location.search).get('query');
   const { data: movies } = useGetMoviesBySearchQuery({
     query: queryFromSearchParameter,
@@ -33,7 +33,7 @@ export const Search = () => {
       </Header>
       <Main>
         {movies?.results.length === 0 && <NotFound>Nothing found for this request!</NotFound>}
-        {movies && <Gallery movies={movies.results} getPage={getPage} pageCount={pageCount} />}
+        {movies && <Gallery movies={movies.results} setPage={setPage} pageCount={pageCount} />}
       </Main>
       <Footer />
     </>

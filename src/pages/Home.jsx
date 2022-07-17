@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { usePagination } from 'hooks';
 
 export const Home = () => {
-  const { page, getPage, pageCount, setPageCount } = usePagination();
+  const { page, setPage, pageCount, setPageCount } = usePagination();
   const { data: movies } = useGetTrendingMoviesQuery(page, { refetchOnMountOrArgChange: 600 });
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export const Home = () => {
         <Dashboard />
       </Header>
       <Main>
-        {movies && <Gallery movies={movies.results} getPage={getPage} pageCount={pageCount} />}
+        {movies && <Gallery movies={movies.results} setPage={setPage} pageCount={pageCount} />}
       </Main>
       <Footer />
     </>

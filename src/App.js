@@ -6,7 +6,7 @@ import { lazy, Suspense } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from 'utils/theme';
 import { useSelector } from 'react-redux';
-import { modeTheme } from 'redux/selectors';
+import { selectors } from 'redux/selectors';
 
 const HomePage = lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
 const LibraryPage = lazy(() =>
@@ -22,7 +22,7 @@ const Registration = lazy(() =>
 );
 
 function App() {
-  const theme = useSelector(modeTheme);
+  const theme = useSelector(selectors.modeTheme);
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>

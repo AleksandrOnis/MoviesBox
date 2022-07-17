@@ -2,9 +2,9 @@ import ReactPaginate from 'react-paginate';
 import styled from 'styled-components';
 import { color, deviceScreen } from 'utils/stylesVars';
 
-export function Pagination({ getPage, pageCount }) {
+export function Pagination({ setPage, pageCount }) {
   const handlePageClick = event => {
-    getPage(event.selected + 1);
+    setPage(event.selected + 1);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

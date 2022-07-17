@@ -12,7 +12,7 @@ import { moviesIds } from 'redux/moviesBox/moviesBoxSlice';
 
 export const Library = () => {
   useLogOutRedirect();
-  const { page, getPage, pageCount, setPageCount } = usePagination();
+  const { page, setPage, pageCount, setPageCount } = usePagination();
   const { data: movies } = useGetMoviesQuery(page, { refetchOnMountOrArgChange: true });
   const dispatch = useDispatch();
 
@@ -29,7 +29,7 @@ export const Library = () => {
       <Main>
         {movies?.result === 0 && <NotFound>Add favorite movies to your collection!</NotFound>}
         {movies?.result.length > 0 && (
-          <Gallery movies={movies.result} getPage={getPage} pageCount={pageCount} />
+          <Gallery movies={movies.result} setPage={setPage} pageCount={pageCount} />
         )}
       </Main>
       <Footer />

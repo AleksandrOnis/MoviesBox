@@ -7,7 +7,7 @@ import { useModal } from 'hooks/useModal';
 import { useGetTrailerByIdQuery } from 'api/movies';
 import { getOfficialTrailer } from 'utils/getOfficialTrailer';
 import { useSelector, useDispatch } from 'react-redux';
-import { isLoggedIn, moviesIds } from 'redux/selectors';
+import { selectors } from 'redux/selectors';
 import { useState, useEffect } from 'react';
 import { addMovieId, delMovieId } from 'redux/moviesBox/moviesBoxSlice';
 
@@ -16,8 +16,8 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
   const movieId = id || movie.movieId;
   const { isModal, openModal, closeModal } = useModal();
   const { data: trailers } = useGetTrailerByIdQuery(movieId);
-  const isLogined = useSelector(isLoggedIn);
-  const filmsIds = useSelector(moviesIds);
+  const isLogined = useSelector(selectors.isLoggedIn);
+  const filmsIds = useSelector(selectors.moviesIds);
   const [isAdded, setIsAdded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();

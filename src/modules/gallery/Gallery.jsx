@@ -5,7 +5,7 @@ import { deviceScreen } from 'utils/stylesVars';
 import { Pagination } from './components/Pagination';
 import { useAddMovieMutation, useDeleteMovieMutation } from 'api/moviesBox';
 
-export const Gallery = ({ movies, getPage, pageCount }) => {
+export const Gallery = ({ movies, setPage, pageCount }) => {
   const [addMovie] = useAddMovieMutation();
   const [deleteMovie] = useDeleteMovieMutation();
 
@@ -26,7 +26,7 @@ export const Gallery = ({ movies, getPage, pageCount }) => {
           })}
         </MoviesList>
 
-        <Pagination getPage={getPage} pageCount={pageCount} />
+        <Pagination setPage={setPage} pageCount={pageCount} />
         {movies?.length > 9 && <ButtonArrow />}
       </Container>
     </SectionGallery>
