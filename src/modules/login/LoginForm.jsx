@@ -10,11 +10,11 @@ import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/user/userSlice';
 
 export const LoginForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [loginUser, { isLoading }] = useLoginUserMutation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleSubmit = async event => {
     event.preventDefault();

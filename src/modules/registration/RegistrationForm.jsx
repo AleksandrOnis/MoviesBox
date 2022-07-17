@@ -9,11 +9,11 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 export const RegistrationForm = () => {
+  const navigate = useNavigate();
   const [registerUser, { isLoading }] = useRegisterUserMutation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
 
   const handleSubmit = async event => {
     event.preventDefault();

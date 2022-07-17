@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ButtonArrow, Container, Spinner } from 'modules/common';
+import { ButtonArrow, Container } from 'modules/common';
 import { MovieCard } from './components/MovieCard';
 import { deviceScreen } from 'utils/stylesVars';
 import { Pagination } from './components/Pagination';
@@ -12,27 +12,22 @@ export const Gallery = ({ movies, getPage, pageCount }) => {
   return (
     <SectionGallery>
       <Container>
-        {movies ? (
-          <>
-            <MoviesList>
-              {movies.map(movie => {
-                const movieId = movie.id || movie.movieId;
-                return (
-                  <MovieCard
-                    key={movieId}
-                    movie={movie}
-                    addMovie={addMovie}
-                    deleteMovie={deleteMovie}
-                  />
-                );
-              })}
-            </MoviesList>
-            <Pagination getPage={getPage} pageCount={pageCount} />
-            {movies?.length > 9 && <ButtonArrow />}
-          </>
-        ) : (
-          <Spinner />
-        )}
+        <MoviesList>
+          {movies.map(movie => {
+            const movieId = movie.id || movie.movieId;
+            return (
+              <MovieCard
+                key={movieId}
+                movie={movie}
+                addMovie={addMovie}
+                deleteMovie={deleteMovie}
+              />
+            );
+          })}
+        </MoviesList>
+
+        <Pagination getPage={getPage} pageCount={pageCount} />
+        {movies?.length > 9 && <ButtonArrow />}
       </Container>
     </SectionGallery>
   );
