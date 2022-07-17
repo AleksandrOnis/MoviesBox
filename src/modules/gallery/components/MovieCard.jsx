@@ -1,18 +1,14 @@
 import styled from 'styled-components';
 import noPoster from 'images/no-poster.jpg';
 import { cubicBezier } from 'utils/stylesVars';
-import { getGenresMovie, titlesGenres } from 'utils/genres';
-import { useModal } from 'hooks';
+import { useGenresMovie, useModal } from 'hooks';
 import { DescriptionMovie, Modal } from 'modules/common';
-import { moviesApi } from 'api/movies';
 
 export const MovieCard = ({ movie, addMovie, deleteMovie }) => {
-  const { title, release_date, vote_average = 'x.x', poster_path } = movie;
+  const { title, release_date, vote_average = 'x.x', poster_path, genre_ids } = movie;
   const { isModal, openModal, closeModal } = useModal();
-  const { data: genresList } = moviesApi.useGetGenresListQuery();
-  const genresMovie = getGenresMovie(genresList);
-  const genresIds = genresMovie(movie.genre_ids);
-  const genres = titlesGenres(genresIds);
+
+  const genres = useGenresMovie(genre_ids);
 
   const handleClick = () => {
     openModal();

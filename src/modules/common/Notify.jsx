@@ -1,6 +1,5 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
-import { color } from 'utils/stylesVars';
 import styled from 'styled-components';
 
 export const Notify = () => {
