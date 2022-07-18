@@ -19,7 +19,6 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
   const movieId = id || movie.movieId;
   const { isModal, openModal, closeModal } = useModal();
   const { data: trailers } = useGetTrailerByIdQuery(movieId);
-
   const isLogined = useSelector(selectors.isLoggedIn);
   const filmsIds = useSelector(selectors.moviesIds);
   const [isAdded, setIsAdded] = useState(false);

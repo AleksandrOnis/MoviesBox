@@ -36,7 +36,7 @@ export const Search = () => {
       <Main>
         {movies?.results.length === 0 && <NotFound>Nothing found for this request!</NotFound>}
         {movies && (
-          <Gallery movies={movies.results} searchQuery={query} pageCount={movies.total_pages} />
+          <Gallery movies={movies.results} paginationKey={query} pageCount={movies.total_pages} />
         )}
       </Main>
       <Footer />
