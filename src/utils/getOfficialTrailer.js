@@ -1,10 +1,5 @@
-import { toast } from 'react-toastify';
-
 export function getOfficialTrailer(trailers = []) {
-  if (trailers.length < 1) {
-    toast.error('Sorry, trailer not found');
-    return;
-  }
+  if (trailers.length < 1) return 0;
 
   const officialTrailers = trailers.find(trailer =>
     trailer.name.toLowerCase().includes('official trailer'),

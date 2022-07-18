@@ -15,6 +15,7 @@ import { Input } from './Input';
 import { SpinnerCircles } from './SpinnerCircles';
 import { ButtonArrow } from './ButtonArrow';
 import { NotFound } from './NotFound';
+import { PrivateRoute } from './PrivateRoute';
 
 export {
   GlobalStyle,
@@ -34,4 +35,5 @@ export {
   SpinnerCircles,
   ButtonArrow,
   NotFound,
+  PrivateRoute,
 };

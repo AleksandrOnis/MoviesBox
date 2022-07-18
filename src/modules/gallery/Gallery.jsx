@@ -5,29 +5,30 @@ import { deviceScreen } from 'utils/stylesVars';
 import { Pagination } from './components/Pagination';
 import { useAddMovieMutation, useDeleteMovieMutation } from 'api/moviesBox';
 
-export const Gallery = ({ movies, getPage, pageCount }) => {
+export const Gallery = ({ movies, pageCount, paginationKey }) => {
   const [addMovie] = useAddMovieMutation();
   const [deleteMovie] = useDeleteMovieMutation();
 
   return (
     <SectionGallery>
       <Container>
-        <MoviesList>
-          {movies.map(movie => {
-            const movieId = movie.id || movie.movieId;
-            return (
-              <MovieCard
-                key={movieId}
-                movie={movie}
-                addMovie={addMovie}
-                deleteMovie={deleteMovie}
-              />
-            );
-          })}
-        </MoviesList>
-
-        <Pagination getPage={getPage} pageCount={pageCount} />
-        {movies?.length > 9 && <ButtonArrow />}
+        <>
+          <MoviesList>
+            {movies.map(movie => {
+              const movieId = movie.id || movie.movieId;
+              return (
+                <MovieCard
+                  key={movieId}
+                  movie={movie}
+                  addMovie={addMovie}
+                  deleteMovie={deleteMovie}
+                />
+              );
+            })}
+          </MoviesList>
+          {pageCount > 1 && <Pagination key={paginationKey} pageCount={pageCount} />}
+          {movies?.length > 9 && <ButtonArrow />}
+        </>
       </Container>
     </SectionGallery>
   );

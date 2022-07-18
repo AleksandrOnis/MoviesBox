@@ -27,16 +27,14 @@ export const MovieCard = ({ movie, addMovie, deleteMovie }) => {
             <Image src={noPoster} alt={`No poster for movie ${title}`} />
           )}
         </WrapImage>
-        {/* <Thumb> */}
         <WrapTitle>
-          <Title> {title} </Title>
-          <Year>{Number.parseInt(release_date)}</Year>
+          <Title> {title || 'NoName'} </Title>
+          <Year>{Number.parseInt(release_date) || 'xxxx'}</Year>
         </WrapTitle>
         <WrapInfo>
-          {genres}
-          <Vote>{vote_average}</Vote>
+          {genres || 'Movie'}
+          <Vote>{vote_average || 'x.x'}</Vote>
         </WrapInfo>
-        {/* </Thumb> */}
       </Card>
       {isModal && (
         <Modal isModal={isModal} closeModal={closeModal}>

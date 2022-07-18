@@ -6,8 +6,12 @@ import { deviceScreen } from 'utils/stylesVars';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { setQuery } from 'redux/search/searchSlice';
+import { useDispatch } from 'react-redux';
+import { setPage } from 'redux/pagination/paginationSlice';
 
 export const SearchBar = () => {
+  const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -19,7 +23,9 @@ export const SearchBar = () => {
       return;
     }
     setSearchQuery('');
-    navigate(`/search?query=${searchQuery}`);
+    dispatch(setQuery(searchQuery));
+    dispatch(setPage(1));
+    navigate(`/search?query=${searchQuery}&page=1`);
   };
 
   return (

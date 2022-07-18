@@ -1,26 +1,31 @@
 import ReactPaginate from 'react-paginate';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { color, deviceScreen } from 'utils/stylesVars';
+import { setPage } from 'redux/pagination/paginationSlice';
+import { selectors } from 'redux/selectors';
 
-export function Pagination({ getPage, pageCount }) {
+export function Pagination({ pageCount }) {
+  const dispatch = useDispatch();
+  const page = useSelector(selectors.page);
+
   const handlePageClick = event => {
-    getPage(event.selected + 1);
+    dispatch(setPage(event.selected + 1));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    pageCount > 1 && (
-      <MyPaginate
-        breakLabel="..."
-        nextLabel=">>"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
-        pageCount={pageCount}
-        previousLabel="<<"
-        renderOnZeroPageCount={null}
-        marginPagesDisplayed={2}
-      />
-    )
+    <MyPaginate
+      breakLabel="..."
+      nextLabel=">>"
+      onPageChange={handlePageClick}
+      pageRangeDisplayed={3}
+      pageCount={pageCount}
+      previousLabel="<<"
+      renderOnZeroPageCount={null}
+      marginPagesDisplayed={2}
+      initialPage={page - 1}
+    />
   );
 }
 

@@ -3,10 +3,10 @@ import { WiDaySunny, WiMoonWaningCrescent4 } from 'react-icons/wi';
 import { color } from 'utils/stylesVars';
 import { useDispatch, useSelector } from 'react-redux';
 import { switchTheme } from 'redux/theme/themeSlice';
-import { modeTheme } from 'redux/selectors';
+import { selectors } from 'redux/selectors';
 
 export const ToggleTheme = ({ onChange }) => {
-  const theme = useSelector(modeTheme);
+  const theme = useSelector(selectors.modeTheme);
   const dispatch = useDispatch();
   return (
     <ToggleWrap>

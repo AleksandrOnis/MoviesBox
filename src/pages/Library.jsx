@@ -1,25 +1,36 @@
-import styled from 'styled-components';
 import { Header } from 'modules/header/Header';
 import { Dashboard } from 'modules/dashboard/Dashboard';
 import { Footer } from 'modules/footer/Footer';
 import { Main, NotFound } from 'modules/common';
-import { useLogOutRedirect, usePagination } from 'hooks';
+import { useCurrentPageIsValid, useGetListMovies } from 'hooks';
 import { useGetMoviesQuery } from 'api/moviesBox';
-import { useEffect } from 'react';
+import { useEffect, useId } from 'react';
 import { Gallery } from 'modules/gallery/Gallery';
-import { useDispatch } from 'react-redux';
-import { moviesIds } from 'redux/moviesBox/moviesBoxSlice';
+import { useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { selectors } from 'redux/selectors';
 
 export const Library = () => {
-  useLogOutRedirect();
-  const { page, getPage, pageCount, setPageCount } = usePagination();
-  const { data: movies } = useGetMoviesQuery(page, { refetchOnMountOrArgChange: true });
-  const dispatch = useDispatch();
+  useCurrentPageIsValid();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const id = useId();
+
+  const page = useSelector(selectors.page);
+
+  const pageFromAddressBar = new URLSearchParams(location.search).get('page');
+
+  const { data: movies } = useGetMoviesQuery(pageFromAddressBar, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  useGetListMovies(movies);
 
   useEffect(() => {
-    setPageCount(movies?.total_pages);
-    dispatch(moviesIds(movies?.moviesIds));
-  }, [movies]);
+    navigate(`/library?page=${page}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
   return (
     <>
@@ -29,7 +40,7 @@ export const Library = () => {
       <Main>
         {movies?.result === 0 && <NotFound>Add favorite movies to your collection!</NotFound>}
         {movies?.result.length > 0 && (
-          <Gallery movies={movies.result} getPage={getPage} pageCount={pageCount} />
+          <Gallery movies={movies.result} paginationKey={id} pageCount={movies.total_pages} />
         )}
       </Main>
       <Footer />

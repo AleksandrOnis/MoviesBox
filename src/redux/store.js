@@ -6,6 +6,8 @@ import { moviesBoxApi } from 'api/moviesBox';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { themeSlice } from './theme/themeSlice';
 import { moviesBoxSlice } from './moviesBox/moviesBoxSlice';
+import { searchSlice } from './search/searchSlice';
+import { paginationSlice } from './pagination/paginationSlice';
 import {
   persistStore,
   persistReducer,
@@ -25,6 +27,8 @@ export const rootReducer = combineReducers({
   user: userSlice.reducer,
   theme: themeSlice.reducer,
   moviesBox: moviesBoxSlice.reducer,
+  search: searchSlice.reducer,
+  pagination: paginationSlice.reducer,
 });
 
 const rootPersistConfig = {

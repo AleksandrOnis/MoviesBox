@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/user/userSlice';
 import { Button } from 'modules/common';
-import { login } from 'redux/selectors';
+import { selectors } from 'redux/selectors';
 import { useSelector } from 'react-redux';
 import { deviceScreen } from 'utils/stylesVars';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
-  const userName = useSelector(login);
+  const userName = useSelector(selectors.login);
 
   return (
     <Wrap>

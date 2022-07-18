@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color, deviceScreen } from 'utils/stylesVars';
+import { deviceScreen } from 'utils/stylesVars';
 import noPoster from 'images/film.jpg';
 import ReactPlayer from 'react-player';
 import { Button, Modal } from '.';
@@ -7,28 +7,32 @@ import { useModal } from 'hooks/useModal';
 import { useGetTrailerByIdQuery } from 'api/movies';
 import { getOfficialTrailer } from 'utils/getOfficialTrailer';
 import { useSelector, useDispatch } from 'react-redux';
-import { isLoggedIn, moviesIds } from 'redux/selectors';
+import { selectors } from 'redux/selectors';
 import { useState, useEffect } from 'react';
 import { addMovieId, delMovieId } from 'redux/moviesBox/moviesBoxSlice';
+import { toast } from 'react-toastify';
 
 export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
+  const dispatch = useDispatch();
+
   const { title, genre_ids, release_date, vote_average, poster_path, overview, id } = movie;
   const movieId = id || movie.movieId;
   const { isModal, openModal, closeModal } = useModal();
   const { data: trailers } = useGetTrailerByIdQuery(movieId);
-  const isLogined = useSelector(isLoggedIn);
-  const filmsIds = useSelector(moviesIds);
+
+  const isLogined = useSelector(selectors.isLoggedIn);
+  const filmsIds = useSelector(selectors.moviesIds);
   const [isAdded, setIsAdded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch();
 
-  let trailer = null;
-  if (trailers) {
-    trailer = getOfficialTrailer(trailers); ///////////////////////MEMO
-  }
+  const trailer = trailers && getOfficialTrailer(trailers);
 
   const handleOpenModal = () => {
-    openModal();
+    trailer === 0
+      ? toast.error('Sorry, trailer not found', {
+          toastId: 'trailer',
+        })
+      : openModal();
   };
 
   const handleAddLibrary = async () => {
@@ -44,7 +48,7 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
         vote_average,
       };
       const result = await addMovie(data);
-      //можна переписати логіку оновлення через кеш
+
       if (result) {
         setIsAdded(true);
         dispatch(addMovieId(movieId));
@@ -71,7 +75,8 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
 
   useEffect(() => {
     setIsAdded(filmsIds?.find(filmId => filmId === movieId));
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filmsIds]);
 
   return (
     <>
@@ -95,6 +100,7 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
             <Button w="140px" accent onClick={handleOpenModal}>
               Watch trailer
             </Button>
+
             {!isLogined ? (
               <Button w="140px" disabled>
                 Login to add
