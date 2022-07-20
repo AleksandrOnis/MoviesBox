@@ -13,7 +13,13 @@ export const Footer = () => {
         <Text>
           Developed
           <AccentWrap> by </AccentWrap>
-          <Name>Oleksandr Onyshchenko</Name>
+          <Link
+            href="https://www.linkedin.com/in/Oleksandr-Onyshchenko-Onis/"
+            title="looking at the Linkedin"
+            target="_blank"
+          >
+            Oleksandr Onyshchenko
+          </Link>
         </Text>
       </Wrap>
     </StyledFooter>
@@ -43,6 +49,13 @@ const Text = styled.p`
   }
 `;
 
-const Name = styled.span`
+const Link = styled.a`
+  color: inherit;
   white-space: nowrap;
+  text-decoration: underline ${color.accent};
+
+  :hover {
+    color: ${color.accent};
+    text-decoration: none;
+  }
 `;
