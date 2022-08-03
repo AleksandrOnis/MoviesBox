@@ -5,7 +5,6 @@ const modeTheme = state => state.theme.mode;
 const moviesIds = state => state.moviesBox.moviesIds;
 const searchQuery = state => state.search.query;
 const page = state => state.pagination.page;
-const pageCount = state => state.pagination.pageCount;
 
 export const selectors = {
   isLoggedIn,
@@ -15,5 +14,4 @@ export const selectors = {
   moviesIds,
   searchQuery,
   page,
-  pageCount,
 };

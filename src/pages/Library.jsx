@@ -2,35 +2,31 @@ import { Header } from 'modules/header/Header';
 import { Dashboard } from 'modules/dashboard/Dashboard';
 import { Footer } from 'modules/footer/Footer';
 import { Main, NotFound } from 'modules/common';
-import { useCurrentPageIsValid, useGetListMovies } from 'hooks';
+import { useGetListMovies, useSetPageFromAddressBar } from 'hooks';
 import { useGetMoviesQuery } from 'api/moviesBox';
-import { useEffect, useId } from 'react';
+import { useEffect } from 'react';
 import { Gallery } from 'modules/gallery/Gallery';
 import { useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { selectors } from 'redux/selectors';
 
 export const Library = () => {
-  useCurrentPageIsValid();
-
-  const navigate = useNavigate();
   const location = useLocation();
-  const id = useId();
+  const setPageFromAddressBar = useSetPageFromAddressBar();
 
   const page = useSelector(selectors.page);
 
-  const pageFromAddressBar = new URLSearchParams(location.search).get('page');
-
-  const { data: movies } = useGetMoviesQuery(pageFromAddressBar, {
+  const { data: movies } = useGetMoviesQuery(page || 1, {
     refetchOnMountOrArgChange: true,
   });
 
   useGetListMovies(movies);
 
   useEffect(() => {
-    navigate(`/library?page=${page}`);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+    const totalPages = movies?.total_pages;
+    setPageFromAddressBar(totalPages);
+    //  eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.search]);
 
   return (
     <>
@@ -40,7 +36,7 @@ export const Library = () => {
       <Main>
         {movies?.result === 0 && <NotFound>Add favorite movies to your collection!</NotFound>}
         {movies?.result.length > 0 && (
-          <Gallery movies={movies.result} paginationKey={id} pageCount={movies.total_pages} />
+          <Gallery movies={movies.result} pageCount={movies.total_pages} />
         )}
       </Main>
       <Footer />

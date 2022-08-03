@@ -25,7 +25,7 @@ export const SearchBar = () => {
     setSearchQuery('');
     dispatch(setQuery(searchQuery));
     dispatch(setPage(1));
-    navigate(`/search?query=${searchQuery}&page=1`);
+    navigate(`/search?query=${searchQuery}`);
   };
 
   return (

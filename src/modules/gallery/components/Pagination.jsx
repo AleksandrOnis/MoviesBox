@@ -1,17 +1,17 @@
 import ReactPaginate from 'react-paginate';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { color, deviceScreen } from 'utils/stylesVars';
-import { setPage } from 'redux/pagination/paginationSlice';
 import { selectors } from 'redux/selectors';
+import { useRelocateOnPage } from 'hooks';
 
 export function Pagination({ pageCount }) {
-  const dispatch = useDispatch();
   const page = useSelector(selectors.page);
+  const relocate = useRelocateOnPage();
 
   const handlePageClick = event => {
-    dispatch(setPage(event.selected + 1));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const nextPage = event.selected + 1;
+    if (page !== nextPage) relocate(nextPage);
   };
 
   return (
@@ -24,7 +24,7 @@ export function Pagination({ pageCount }) {
       previousLabel="<<"
       renderOnZeroPageCount={null}
       marginPagesDisplayed={2}
-      initialPage={page - 1}
+      forcePage={page - 1}
     />
   );
 }

@@ -4,29 +4,28 @@ import { Dashboard } from 'modules/dashboard/Dashboard';
 import { Footer } from 'modules/footer/Footer';
 import { Gallery } from 'modules/gallery/Gallery';
 import { useGetMoviesBySearchQuery } from 'api/movies';
-import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectors } from 'redux/selectors';
-import { useCurrentPageIsValid } from 'hooks';
+import { useEffect } from 'react';
+import { useSetPageFromAddressBar } from 'hooks';
 
 export const Search = () => {
-  useCurrentPageIsValid();
-  const navigate = useNavigate();
   const location = useLocation();
+  const setPageFromAddressBar = useSetPageFromAddressBar();
   const page = useSelector(selectors.page);
   const query = useSelector(selectors.searchQuery);
   const queryFromAddressBar = new URLSearchParams(location.search).get('query');
-  const pageFromAddressBar = new URLSearchParams(location.search).get('page');
   const { data: movies } = useGetMoviesBySearchQuery({
     query: queryFromAddressBar,
-    page: pageFromAddressBar,
+    page: page || 1,
   });
 
   useEffect(() => {
-    navigate(`/search?query=${queryFromAddressBar}&page=${page}`);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+    const totalPages = movies?.total_pages;
+    setPageFromAddressBar(totalPages);
+    //  eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.search]);
 
   return (
     <>
@@ -35,9 +34,7 @@ export const Search = () => {
       </Header>
       <Main>
         {movies?.results.length === 0 && <NotFound>Nothing found for this request!</NotFound>}
-        {movies && (
-          <Gallery movies={movies.results} paginationKey={query} pageCount={movies.total_pages} />
-        )}
+        {movies && <Gallery movies={movies.results} pageCount={movies.total_pages} />}
       </Main>
       <Footer />
     </>

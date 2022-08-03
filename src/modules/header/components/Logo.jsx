@@ -7,7 +7,7 @@ export const Logo = ({ title = 'MoviesBox', mobileHidden }) => {
   return (
     <Wrap fd="row" g="10px">
       <StyledLogo src={logo} />
-      <StyledNavLink to="/main">
+      <StyledNavLink to="/home">
         <Title mobileHidden={mobileHidden}>{title}</Title>
       </StyledNavLink>
     </Wrap>
