@@ -1,4 +1,4 @@
-import { Main } from 'modules/common';
+import { Main, Spinner } from 'modules/common';
 import { Header } from 'modules/header/Header';
 import { Dashboard } from 'modules/dashboard/Dashboard';
 import { Footer } from 'modules/footer/Footer';
@@ -15,7 +15,7 @@ export const Home = () => {
   const setPageFromAddressBar = useSetPageFromAddressBar();
   const page = useSelector(selectors.page);
 
-  const { data: movies } = useGetTrendingMoviesQuery(page || 1, {
+  const { data: movies, isFetching } = useGetTrendingMoviesQuery(page || 1, {
     refetchOnMountOrArgChange: 600,
   });
 
@@ -30,7 +30,13 @@ export const Home = () => {
       <Header>
         <Dashboard />
       </Header>
-      <Main>{movies && <Gallery movies={movies.results} pageCount={movies.total_pages} />}</Main>
+      <Main>
+        {isFetching ? (
+          <Spinner />
+        ) : (
+          <Gallery movies={movies.results} pageCount={movies.total_pages} />
+        )}
+      </Main>
       <Footer />
     </>
   );

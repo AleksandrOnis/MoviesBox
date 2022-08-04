@@ -1,4 +1,4 @@
-import { Main, NotFound } from 'modules/common';
+import { Main, NotFound, Spinner } from 'modules/common';
 import { Header } from 'modules/header/Header';
 import { Dashboard } from 'modules/dashboard/Dashboard';
 import { Footer } from 'modules/footer/Footer';
@@ -14,9 +14,8 @@ export const Search = () => {
   const location = useLocation();
   const setPageFromAddressBar = useSetPageFromAddressBar();
   const page = useSelector(selectors.page);
-  const query = useSelector(selectors.searchQuery);
   const queryFromAddressBar = new URLSearchParams(location.search).get('query');
-  const { data: movies } = useGetMoviesBySearchQuery({
+  const { data: movies, isFetching } = useGetMoviesBySearchQuery({
     query: queryFromAddressBar,
     page: page || 1,
   });
@@ -33,8 +32,12 @@ export const Search = () => {
         <Dashboard />
       </Header>
       <Main>
-        {movies?.results.length === 0 && <NotFound>Nothing found for this request!</NotFound>}
-        {movies && <Gallery movies={movies.results} pageCount={movies.total_pages} />}
+        {isFetching ? (
+          <Spinner />
+        ) : (
+          (movies?.results.length === 0 && <NotFound>Nothing found for this request!</NotFound>) ||
+          (movies && <Gallery movies={movies.results} pageCount={movies.total_pages} />)
+        )}
       </Main>
       <Footer />
     </>

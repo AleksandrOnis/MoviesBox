@@ -1,7 +1,7 @@
 import { Header } from 'modules/header/Header';
 import { Dashboard } from 'modules/dashboard/Dashboard';
 import { Footer } from 'modules/footer/Footer';
-import { Main, NotFound } from 'modules/common';
+import { Main, NotFound, Spinner } from 'modules/common';
 import { useGetListMovies, useSetPageFromAddressBar } from 'hooks';
 import { useGetMoviesQuery } from 'api/moviesBox';
 import { useEffect } from 'react';
@@ -16,7 +16,7 @@ export const Library = () => {
 
   const page = useSelector(selectors.page);
 
-  const { data: movies } = useGetMoviesQuery(page || 1, {
+  const { data: movies, isFetching } = useGetMoviesQuery(page || 1, {
     refetchOnMountOrArgChange: true,
   });
 
@@ -34,9 +34,13 @@ export const Library = () => {
         <Dashboard />
       </Header>
       <Main>
-        {movies?.result === 0 && <NotFound>Add favorite movies to your collection!</NotFound>}
-        {movies?.result.length > 0 && (
-          <Gallery movies={movies.result} pageCount={movies.total_pages} />
+        {isFetching ? (
+          <Spinner />
+        ) : (
+          (movies?.result === 0 && <NotFound>Add favorite movies to your collection!</NotFound>) ||
+          (movies?.result.length > 0 && (
+            <Gallery movies={movies.result} pageCount={movies.total_pages} />
+          ))
         )}
       </Main>
       <Footer />
