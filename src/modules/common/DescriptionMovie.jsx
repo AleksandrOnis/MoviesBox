@@ -27,11 +27,11 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
   const trailer = trailers && getOfficialTrailer(trailers);
 
   const handleOpenModal = () => {
-    trailer === 0
-      ? toast.error('Sorry, trailer not found', {
+    trailer && ReactPlayer.canPlay(`https://www.youtube.com/watch?v=${trailer.key}`)
+      ? openModal()
+      : toast.error('Sorry, trailer not found', {
           toastId: 'trailer',
-        })
-      : openModal();
+        });
   };
 
   const handleAddLibrary = async () => {
