@@ -13,7 +13,10 @@ export const useSetPageFromAddressBar = () => {
 
   return function setPageFromAddressBar(totalPages) {
     const initPage = new URLSearchParams(location.search).get('page');
-    if (isValidPage(initPage, totalPages)) page !== initPage && dispatch(setPage(initPage));
-    else relocate(1);
+    if (initPage !== null)
+      if (isValidPage(initPage, totalPages)) {
+        page !== initPage && dispatch(setPage(initPage));
+      } else relocate(1);
+    else dispatch(setPage(1));
   };
 };

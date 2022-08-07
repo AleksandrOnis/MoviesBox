@@ -18,7 +18,7 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
   const { title, genre_ids, release_date, vote_average, poster_path, overview, id } = movie;
   const movieId = id || movie.movieId;
   const { isModal, openModal, closeModal } = useModal();
-  const { data: trailers } = useGetTrailerByIdQuery(movieId);
+  const { data: trailers, isFetching } = useGetTrailerByIdQuery(movieId);
   const isLogined = useSelector(selectors.isLoggedIn);
   const filmsIds = useSelector(selectors.moviesIds);
   const [isAdded, setIsAdded] = useState(false);
@@ -27,7 +27,7 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
   const trailer = trailers && getOfficialTrailer(trailers);
 
   const handleOpenModal = () => {
-    trailer && ReactPlayer.canPlay(`https://www.youtube.com/watch?v=${trailer.key}`)
+    trailer
       ? openModal()
       : toast.error('Sorry, trailer not found', {
           toastId: 'trailer',
@@ -35,6 +35,7 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
   };
 
   const handleAddLibrary = async () => {
+    if (isLoading) return;
     try {
       setIsLoading(true);
       const data = {
@@ -59,6 +60,7 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
   };
 
   const handleDelLibrary = async () => {
+    if (isLoading) return;
     try {
       setIsLoading(true);
       const result = await deleteMovie(movieId);
@@ -96,8 +98,14 @@ export const DescriptionMovie = ({ movie = {}, addMovie, deleteMovie }) => {
           <About>About </About>
           <Description>{overview}</Description>
           <WrapButton>
-            <Button w="140px" accent onClick={handleOpenModal}>
-              Watch trailer
+            <Button
+              w="140px"
+              accent
+              onClick={handleOpenModal}
+              disabled={!trailer}
+              isLoading={isFetching}
+            >
+              {trailer ? 'Watch trailer' : 'Trailer not found'}
             </Button>
 
             {!isLogined ? (

@@ -60,8 +60,7 @@ export const RegistrationForm = () => {
         mb="30px"
         required
       />
-      {/* <Button type="submit" accent disabled={!name || !email || !password}> */}
-      <Button type="submit" accent isLoading={isLoading}>
+      <Button type="submit" accent disabled={isLoading} isLoading={isLoading}>
         Registration
       </Button>
     </Form>

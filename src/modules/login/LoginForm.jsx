@@ -51,8 +51,7 @@ export const LoginForm = () => {
         mb="30px"
         required
       />
-      {/* <Button type="submit" accent disabled={!email || !password}> */}
-      <Button type="submit" accent isLoading={isLoading}>
+      <Button type="submit" accent disabled={isLoading} isLoading={isLoading}>
         Login
       </Button>
     </Form>
